@@ -6,7 +6,10 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of NPSdatastore is to …
+NPS DataStore is the official home of NPS datasets, publications, and
+more. Use this package to search the contents of DataStore, download
+files, and publish new content (write access for authorized NPS users
+only).
 
 ## Installation
 
@@ -20,7 +23,7 @@ pak::pak("nationalparkservice/NPSdatastore")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Search content on NPS Datastore:
 
 ``` r
 library(NPSdatastore)
