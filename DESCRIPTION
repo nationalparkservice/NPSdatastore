@@ -14,3 +14,6 @@ Config/testthat/edition: 3
 Imports: 
     httr2,
     magrittr
+Depends: 
+    R (>= 3.5)
+LazyData: true

@@ -64,3 +64,43 @@ assign("ds_dev_public_api",
   return(request)
 }
 
+#' Retrieve some valid DataStore reference IDs
+#'
+#' For example and testing purposes. See `?NPSdatastore::public_refs and ?NPSdatastore::internal_refs` for more information.
+#'
+#' @param visiblity Return public-facing IDs, internal-facing IDs, or a mix of both?
+#' @param n Optional. Number of IDs to return. Will randomly sample `n` IDs. If `visibility == 'both'`, there is no guarantee that the sample of `n` IDs will return both public and internal-facing IDs. There are 48 public-facing IDs and 45 internal-facing.
+#' @param seed Optional. Set this if you need your sample of IDs to come back the same every time.
+#'
+#' @returns An integer vector of DataStore reference IDs.
+#' @export
+#'
+#' @examples
+#' public_ids <- datastore_example_refs(visibility = "public", n = 5)
+#' all_ids <- datastore_example_refs(visibility = "both")
+#'
+datastore_example_refs <- function(visiblity = c("public", "internal", "both"), n, seed) {
+  visibility <- match.arg(visiblity, several.ok = FALSE)
+
+  if (visibility == "public") {
+    refs <- public_refs
+  } else if (visibility == "internal") {
+    refs <- internal_refs
+  } else if (visibility == "both") {
+    refs <- c(public_refs, internal_refs)
+  }
+
+  if (missing(n)) {
+    n <- length(refs)
+  } else if (n > length(refs)) {
+    cli::cli_warn("{.arg n} exceeds total number of example reference IDs. Returning all example reference IDs.")
+  }
+
+  if (!missing(seed)) {
+    set.seed(seed)
+  }
+
+  refs <- sample(refs, min(n, length(refs)), replace = FALSE)
+
+  return(refs)
+}
