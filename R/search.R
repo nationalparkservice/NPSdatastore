@@ -12,19 +12,26 @@
 #'
 search_references_by_id <- function(reference_ids, nps_internal = FALSE, dev = FALSE) {
 
-  reference_ids <- unique(reference_ids)
+  reference_ids <- unique(reference_ids)  # Make sure there aren't duplicate IDs
 
-  if (length(reference_ids) > 25) {
-    cli::cli_abort("You may only provide 25 reference IDs at a time.")
+  # The DataStore API only returns reference profiles for a maximum of 25 IDs,
+  # so we have to make multiple requests if there are more than 25
+  n_requests <- ceiling(length(reference_ids)/25)
+
+  references <- list()
+  for (i in 1:n_requests) {
+    start <- (i - 1) * 25 + 1
+    end <- min(i * 25, length(reference_ids))
+    ref_ids <- reference_ids[start:end]
+
+    request <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
+      httr2::req_url_path_append("Profile") |>
+      httr2::req_url_query(q = reference_ids, .multi = "comma")
+
+    response <- httr2::req_perform(request)
+
+    references <- c(references, httr2::resp_body_json(response))
   }
-
-  request <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
-    httr2::req_url_path_append("Profile") |>
-    httr2::req_url_query(q = reference_ids, .multi = "comma")
-
-  response <- httr2::req_perform(request)
-
-  references <- httr2::resp_body_json(response)
 
   if (length(references) < length(reference_ids)) {
     ids_returned <- sapply(references, function(refs) {refs$referenceId})
