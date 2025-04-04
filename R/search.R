@@ -8,7 +8,12 @@
 #' @export
 #'
 #' @examples
-#'
+#' \dontrun{
+#' ids <- example_ref_ids(n = 2, seed = 2025)
+#' ref_profiles <- search_references_by_id(reference_ids = ids,
+#'                                         nps_internal = FALSE,
+#'                                         dev = FALSE)
+#' }
 #'
 search_references_by_id <- function(reference_ids, nps_internal = FALSE, dev = FALSE) {
 

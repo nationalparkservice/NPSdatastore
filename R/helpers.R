@@ -27,6 +27,10 @@ assign("ds_dev_public_api",
        envir = .pkgglobalenv
 )
 
+#this gets rid of the "no visible binding for global variable 'x'" error in build checks:
+globalVariables(c("public_refs",
+                  "internal_refs"))
+
 
 #' Get the right base URL for the DataStore API
 #'
@@ -112,7 +116,7 @@ assign("ds_dev_public_api",
 #'
 #' For example and testing purposes. See `?NPSdatastore::public_refs and ?NPSdatastore::internal_refs` for more information.
 #'
-#' @param visiblity Return public-facing IDs, internal-facing IDs, or a mix of both?
+#' @param visibility Return public-facing IDs, internal-facing IDs, or a mix of both?
 #' @param n Optional. Number of IDs to return. Will randomly sample `n` IDs. If `visibility == 'both'`, there is no guarantee that the sample of `n` IDs will return both public and internal-facing IDs. There are 48 public-facing IDs and 45 internal-facing.
 #' @param seed Optional. Set this if you need your sample of IDs to come back the same every time.
 #'
@@ -123,8 +127,8 @@ assign("ds_dev_public_api",
 #' public_ids <- example_ref_ids(visibility = "public", n = 5)
 #' all_ids <- example_ref_ids(visibility = "both")
 #'
-example_ref_ids <- function(visiblity = c("public", "internal", "both"), n, seed) {
-  visibility <- match.arg(visiblity, several.ok = FALSE)
+example_ref_ids <- function(visibility = c("public", "internal", "both"), n, seed) {
+  visibility <- match.arg(visibility, several.ok = FALSE)
 
   if (visibility == "public") {
     refs <- public_refs

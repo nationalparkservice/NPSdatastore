@@ -4,10 +4,10 @@
 \alias{example_ref_ids}
 \title{Retrieve some valid DataStore reference IDs}
 \usage{
-example_ref_ids(visiblity = c("public", "internal", "both"), n, seed)
+example_ref_ids(visibility = c("public", "internal", "both"), n, seed)
 }
 \arguments{
-\item{visiblity}{Return public-facing IDs, internal-facing IDs, or a mix of both?}
+\item{visibility}{Return public-facing IDs, internal-facing IDs, or a mix of both?}
 
 \item{n}{Optional. Number of IDs to return. Will randomly sample \code{n} IDs. If \code{visibility == 'both'}, there is no guarantee that the sample of \code{n} IDs will return both public and internal-facing IDs. There are 48 public-facing IDs and 45 internal-facing.}
 

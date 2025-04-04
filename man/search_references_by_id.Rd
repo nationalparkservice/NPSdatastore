@@ -19,3 +19,12 @@ fill in later
 \description{
 Search NPS DataStore references by their ID
 }
+\examples{
+\dontrun{
+ids <- example_ref_ids(n = 2, seed = 2025)
+ref_profiles <- search_references_by_id(reference_ids = ids,
+                                        nps_internal = FALSE,
+                                        dev = FALSE)
+}
+
+}
