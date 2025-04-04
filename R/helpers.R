@@ -64,6 +64,50 @@ assign("ds_dev_public_api",
   return(request)
 }
 
+.get_reference_profiles <- function(reference_ids, nps_internal, dev) {
+  request <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
+    httr2::req_url_path_append("Profile") |>
+    httr2::req_url_query(q = reference_ids, .multi = "comma") |>
+    httr2::req_perform()
+
+  response <- httr2::resp_body_json(request)
+
+  # Clean up reference profiles - simplify some lists to vectors and some to tibbles
+  to_vectors <- c("keywords", "subjects")
+  to_tibbles <- c("taxa", "units", "contentProducerUnits", "filesAndLinks")
+
+  response <- lapply(response, function(ref) {
+    ref <- .lists2vectors(ref, to_vectors)
+    ref <- .lists2tibbles(ref, to_tibbles)
+
+    return(ref)
+  })
+
+
+  ids <- sapply(response, function(ref) {ref$referenceId})
+  names(response) <- ids
+
+  return(response)
+}
+
+.lists2vectors <- function(parent_list, child_list_names) {
+  for (child_list in child_list_names) {
+    if (!is.null(parent_list[[child_list]])) {
+      parent_list[[child_list]] <- unlist(parent_list[[child_list]], use.names = FALSE)
+    }
+  }
+  return(parent_list)
+}
+
+.lists2tibbles <- function(parent_list, child_list_names) {
+  for (child_list in child_list_names) {
+    if (!is.null(parent_list[[child_list]])) {
+      parent_list[[child_list]] <- dplyr::bind_rows(parent_list[[child_list]])
+    }
+  }
+  return(parent_list)
+}
+
 #' Retrieve some valid DataStore reference IDs
 #'
 #' For example and testing purposes. See `?NPSdatastore::public_refs and ?NPSdatastore::internal_refs` for more information.

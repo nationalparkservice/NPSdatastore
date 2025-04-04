@@ -24,13 +24,10 @@ search_references_by_id <- function(reference_ids, nps_internal = FALSE, dev = F
     end <- min(i * 25, length(reference_ids))
     ref_ids <- reference_ids[start:end]
 
-    request <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
-      httr2::req_url_path_append("Profile") |>
-      httr2::req_url_query(q = reference_ids, .multi = "comma")
-
-    response <- httr2::req_perform(request)
-
-    references <- c(references, httr2::resp_body_json(response))
+    references <- c(references,
+                    .get_reference_profiles(ref_ids,
+                                      nps_internal = nps_internal,
+                                      dev = dev))
   }
 
   if (length(references) < length(reference_ids)) {
@@ -41,3 +38,4 @@ search_references_by_id <- function(reference_ids, nps_internal = FALSE, dev = F
 
   return(references)
 }
+
