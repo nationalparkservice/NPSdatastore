@@ -76,10 +76,10 @@ assign("ds_dev_public_api",
 #' @export
 #'
 #' @examples
-#' public_ids <- datastore_example_refs(visibility = "public", n = 5)
-#' all_ids <- datastore_example_refs(visibility = "both")
+#' public_ids <- example_ref_ids(visibility = "public", n = 5)
+#' all_ids <- example_ref_ids(visibility = "both")
 #'
-datastore_example_refs <- function(visiblity = c("public", "internal", "both"), n, seed) {
+example_ref_ids <- function(visiblity = c("public", "internal", "both"), n, seed) {
   visibility <- match.arg(visiblity, several.ok = FALSE)
 
   if (visibility == "public") {

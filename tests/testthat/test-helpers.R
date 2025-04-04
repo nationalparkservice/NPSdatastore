@@ -25,12 +25,12 @@ test_that(".datastore_request returns the correct URL and auth info", {
 
 })
 
-test_that("datastore_example_refs returns example reference IDs", {
-  expect_length(datastore_example_refs(n = 5), 5)
-  expect_length(datastore_example_refs(visiblity = "internal"), 45)
-  expect_length(datastore_example_refs(visiblity = "public"), 48)
-  expect_length(datastore_example_refs(visiblity = "both"), 45 + 48)
-  expect_length(suppressWarnings(datastore_example_refs(n = 500)), 48)
-  expect_warning(datastore_example_refs(n = 500), "exceeds total number")
+test_that("example_ref_ids returns example reference IDs", {
+  expect_length(example_ref_ids(n = 5), 5)
+  expect_length(example_ref_ids(visiblity = "internal"), 45)
+  expect_length(example_ref_ids(visiblity = "public"), 48)
+  expect_length(example_ref_ids(visiblity = "both"), 45 + 48)
+  expect_length(suppressWarnings(example_ref_ids(n = 500)), 48)
+  expect_warning(example_ref_ids(n = 500), "exceeds total number")
 
 })
