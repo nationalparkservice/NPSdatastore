@@ -181,3 +181,48 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
 
   return(refs)
 }
+
+#' Validate reference ID arguments
+#'
+#' @param ref_id The reference ID argument to validate
+#' @param multiple_ok Can ref_id be a vector of multiple IDs?
+#' @param arg Used to get the actual name of the argument in the calling function. See `?rlang::`topic-error-call``
+#' @param call The caller environment, for more helpful error messages. See `?rlang::`topic-error-call``
+#'
+.validate_ref_id <- function(ref_id, multiple_ok = FALSE,
+                 arg = rlang::caller_arg(ref_id),
+                 call = rlang::caller_env()) {
+  # Enforce single reference ID
+  if (!multiple_ok) {
+    if (length(ref_id) > 1) {
+      cli::cli_abort("You may only provide one reference ID at a time.",
+                     call = call)
+    }
+  }
+
+  # Enforce numeric reference ID
+  if (!all(is.numeric(ref_id))) {
+    cli::cli_abort("{.arg {arg}} is invalid. Reference IDs must be numeric. Check for typos, and ensure that reference IDs aren't surrounded by quotation marks.",
+                   call = call)
+  }
+
+  # Enforce integer reference ID
+  if (!all(ref_id == floor(ref_id))) {
+    cli::cli_abort("{.arg {arg}} is invalid. Reference IDs must be whole number(s). Check for typos.",
+                   call = call)
+  }
+
+}
+
+.validate_file_path <- function(file_path,
+                                arg = rlang::caller_arg(file_path),
+                                call = rlang::caller_env()) {
+  # Enforce path exists
+  if (!file.exists(file_path)) {
+    cli::cli_abort("{.arg {arg}} is not a valid file location. Check for typos!")
+  }
+  # Enforce is file, not folder
+  if (dir.exists(file_path)) {
+    cli::cli_abort("{.arg {arg}} must include a filename (e.g. \"data.csv\"). It looks like you provided the path to a folder instead.")
+  }
+}
