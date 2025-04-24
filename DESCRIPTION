@@ -15,8 +15,10 @@ Config/testthat/edition: 3
 Imports: 
     cli,
     dplyr,
+    glue,
     httr2,
-    magrittr
+    magrittr,
+    rlang
 Depends: 
     R (>= 3.5)
 LazyData: true
