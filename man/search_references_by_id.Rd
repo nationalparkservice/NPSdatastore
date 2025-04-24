@@ -14,7 +14,7 @@ search_references_by_id(reference_ids, nps_internal = FALSE, dev = FALSE)
 \item{dev}{Logical. Set to TRUE to use the development & testing version of the API. If this means nothing to you, ignore and allow it to default to FALSE.}
 }
 \value{
-fill in later
+A list of reference profiles
 }
 \description{
 Search NPS DataStore references by their ID

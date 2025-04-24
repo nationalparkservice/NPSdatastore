@@ -4,7 +4,7 @@
 #' @param nps_internal Logical. NPS users on the internal network can set to TRUE to authenticate and view non-public data and create or modify references. All other users can ignore this argument and allow it to default to FALSE.
 #' @param dev Logical. Set to TRUE to use the development & testing version of the API. If this means nothing to you, ignore and allow it to default to FALSE.
 #'
-#' @returns fill in later
+#' @returns A list of reference profiles
 #' @export
 #'
 #' @examples
@@ -31,8 +31,8 @@ search_references_by_id <- function(reference_ids, nps_internal = FALSE, dev = F
 
     references <- c(references,
                     .get_reference_profiles(ref_ids,
-                                      nps_internal = nps_internal,
-                                      dev = dev))
+                                            is_secure = nps_internal,
+                                            is_dev = dev))
   }
 
   if (length(references) < length(reference_ids)) {
