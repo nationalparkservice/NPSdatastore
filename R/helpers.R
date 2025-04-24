@@ -68,8 +68,18 @@ globalVariables(c("public_refs",
   return(request)
 }
 
-.get_reference_profiles <- function(reference_ids, nps_internal, dev) {
-  request <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
+#' Perform a single request to the Profile endpoint and tidy the data a little
+#'
+#' This endpoint only returns 25 results at a time; this helper function is used
+#' inside of a loop or apply fxn to support retrieval of >25 profiles at a time
+#'
+#' @param reference_ids numeric vector of <=25 reference IDs
+#' @inheritParams .get_base_url
+#'
+#' @returns List of reference profiles
+#'
+.get_reference_profiles <- function(reference_ids, is_secure, is_dev) {
+  request <- .datastore_request(is_secure = is_secure, is_dev = is_dev) |>
     httr2::req_url_path_append("Profile") |>
     httr2::req_url_query(q = reference_ids, .multi = "comma") |>
     httr2::req_perform()
@@ -94,6 +104,15 @@ globalVariables(c("public_refs",
   return(response)
 }
 
+#' Convert lists in a reference profile to vectors
+#'
+#' Use for elements like keywords and subjects that are returned as lists of single-element lists
+#'
+#' @param parent_list The list representing the reference profile
+#' @param child_list_names The elements of the reference profile that should be converted to vectors
+#'
+#' @returns The tidied reference profile
+#'
 .lists2vectors <- function(parent_list, child_list_names) {
   for (child_list in child_list_names) {
     if (!is.null(parent_list[[child_list]])) {
@@ -103,6 +122,16 @@ globalVariables(c("public_refs",
   return(parent_list)
 }
 
+#' Convert lists in a reference profile to tibbles
+#'
+#' Use for reference profile elements like taxa and units that are returned as
+#' lists but would be more appropriately stored as tibbles
+#'
+#' @param parent_list The list representing the reference profile
+#' @param child_list_names The elements of the reference profile that should be converted to tibbles
+#'
+#' @returns The tidied reference profile
+#'
 .lists2tibbles <- function(parent_list, child_list_names) {
   for (child_list in child_list_names) {
     if (!is.null(parent_list[[child_list]])) {
