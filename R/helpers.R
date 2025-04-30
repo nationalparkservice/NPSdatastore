@@ -219,10 +219,55 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
                                 call = rlang::caller_env()) {
   # Enforce path exists
   if (!file.exists(file_path)) {
-    cli::cli_abort("{.arg {arg}} is not a valid file location. Check for typos!")
+    cli::cli_abort("{.arg {arg}} is not a valid file location. Check for typos!",
+                   call = call)
   }
   # Enforce is file, not folder
   if (dir.exists(file_path)) {
-    cli::cli_abort("{.arg {arg}} must include a filename (e.g. \"data.csv\"). It looks like you provided the path to a folder instead.")
+    cli::cli_abort("{.arg {arg}} must include a filename (e.g. \"data.csv\"). It looks like you provided the path to a folder instead.",
+                   call = call)
+  }
+}
+
+.validate_retry <- function(retry,
+                            arg = rlang::caller_arg(retry),
+                            call = rlang::caller_env()) {
+  if (retry %% 1 != 0) {
+    cli::cli_abort("{.arg {arg}} must be an integer.",
+                   call = call)
+  }
+  if (retry < 0) {
+    cli::cli_abort("{.arg {arg}} cannot be less than zero.",
+                   call = call)
+  }
+
+}
+
+
+.validate_resp <- function(resp,
+                           nice_msg_400,
+                           nice_msg_500,
+                           call = rlang::caller_env()) {
+
+  if (httr2::resp_is_error(resp)) {
+    if (missing(nice_msg_400)) {
+      nice_msg_400 <- c("i" = "There's a problem with your API request. Check reference IDs, search terms, etc. for typos.",
+                        "i" = "If you are an NPS user attempting to edit a reference or access non-public data, verify that you are on the NPS network, have the appropriate permissions, and have set {.arg nps_internal = TRUE} if applicable.",
+                        "i" = "Verify that {.arg dev} is set correctly.")
+    }
+    if (missing(nice_msg_500)) {
+      nice_msg_500 <- c("i" = "Something seems to have gone wrong on DataStore's end. For troubleshooting help, take a screenshot of this error and contact the package maintainer or the DataStore helpdesk.")
+    }
+
+    status_num <- httr2::resp_status(resp)
+
+    if (floor(status_num/100) == 5) {
+      nice_msg <- nice_msg_500
+    } else if (floor(status_num/100) == 4) {
+      nice_msg <- nice_msg_400
+    }
+
+    http_err <- glue::glue("HTTP {status_num}: {httr2::resp_status_desc(resp)}")
+    cli::cli_abort(c(http_err, nice_msg), call = call)
   }
 }
