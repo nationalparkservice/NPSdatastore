@@ -10,7 +10,8 @@ upload_file_to_reference(
   is_508 = FALSE,
   dev = TRUE,
   interactive = TRUE,
-  chunk_size_mb = 1
+  chunk_size_mb = 1,
+  retry = 1
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ upload_file_to_reference(
 \item{interactive}{Logical. Prompt for user confirmation before uploading?}
 
 \item{chunk_size_mb}{The "chunk" size to break the file into for upload. If your network is slow and your uploads are failing, try decreasing this number (e.g. 0.5 or 0.25).}
+
+\item{retry}{How many times to retry uploading a file chunk if it fails on the first try.}
 }
 \value{
 A list of metadata for the uploaded file(s)
