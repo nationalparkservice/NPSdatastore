@@ -48,7 +48,7 @@ upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, de
     httr2::req_body_json(list(Name = file_name,
                               Is508Compliant = is_508),
                          type = "application/json") |>
-    httr2::req_error(is_error = FALSE) |>
+    httr2::req_error(is_error = \(resp) FALSE) |>
     httr2::req_perform()
 
   .validate_resp(upload_token,
@@ -96,11 +96,11 @@ upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, de
                            `Content-Range` = glue::glue("bytes {start}-{end}/{file_size_bytes}")) |>
         httr2::req_body_raw(readBin(file_con, raw(), n = n_bytes)) |>
         httr2::req_options(httpauth = 4L, userpwd = ":::") |>
-        httr2::req_error(is_error = FALSE) |>
+        httr2::req_error(is_error = \(resp) FALSE) |>
         httr2::req_perform()
 
       if (!httr2::resp_is_error(upload_resp) || httr2::resp_status(upload_resp) == 410) {
-        # If upload is succesful, or if error is due to token problem, don't retry
+        # If upload is successful, or if error is due to token problem, don't retry
         n_retries <- -1
       } else {
         # Decrement retries remaining
