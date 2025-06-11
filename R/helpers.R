@@ -271,3 +271,17 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
     cli::cli_abort(c(http_err, nice_msg), call = call)
   }
 }
+
+.user_validate_ref_title <- function(ref_id, is_secure, is_dev,
+                                     call = rlang::caller_env()) {
+  # Get reference title
+  ref <- search_references_by_id_basic(reference_ids = ref_id, nps_internal = is_secure, dev = is_dev)
+  ref_title <- ref$title
+
+  # Get user input
+  cli::cli_alert("You are about to modify the following reference: {ref_title}. Do you wish to continue?\n", wrap = TRUE)
+  answer <- readline("(Y/N): ")
+  if (!(tolower(answer) %in% c("y", "yes"))) {
+    cli::cli_abort("Operation aborted by user.", call = call)
+  }
+}
