@@ -27,4 +27,5 @@ Depends:
     R (>= 3.5)
 LazyData: true
 VignetteBuilder: knitr
-URL: https://nationalparkservice.github.io/NPSdatastore/
+URL: https://nationalparkservice.github.io/NPSdatastore/, https://github.com/nationalparkservice/NPSdatastore
+BugReports: https://github.com/nationalparkservice/NPSdatastore/issues
