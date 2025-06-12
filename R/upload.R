@@ -13,7 +13,7 @@
 #' @param chunk_size_mb The "chunk" size to break the file into for upload. If your network is slow and your uploads are failing, try decreasing this number (e.g. 0.5 or 0.25).
 #' @param retry How many times to retry uploading a file chunk if it fails on the first try.
 #'
-#' @returns A list of metadata for the uploaded file(s)
+#' @returns A list containing the download URL and file ID for the uploaded file.
 #' @export
 #'
 #' @examples
@@ -41,6 +41,13 @@ upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, de
   file_name <- basename(file_path)  # Get just the filename
 
   # TODO: Allow user to pass in existing token?
+
+  # Verify that we're modifying the right reference
+  if (interactive) {
+    .user_validate_ref_title(ref_id = reference_id,
+                             is_secure = TRUE,
+                             is_dev = dev)
+  }
 
   # Get a token, which we need for a multi-chunk upload
   upload_token <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
@@ -125,7 +132,9 @@ upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, de
   close(file_con)
 
   # TODO: Return details on uploaded file
+  file_info <- list(url = upload_resp$headers$Location,
+                    file_id = httr2::resp_body_json(upload_resp))
 
-  return(upload_resp)
+  return(file_info)
 }
 

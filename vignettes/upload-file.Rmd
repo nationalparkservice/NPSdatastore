@@ -31,7 +31,7 @@ references and therefore cannot directly contain files.
 
 ## Testing
 
-Consider using [https://irmadev.nps.gov/DataStore]
+Consider using the testing version of DataStore [https://irmadev.nps.gov/DataStore] to make sure your code works as expected before uploading to the real DataStore. This is an especially good idea if you are iterating through a large number of files.
 
 ## Uploading the file
 
@@ -52,7 +52,9 @@ Set that information using the code template below:
 ```{r args, eval = FALSE}
 file_to_upload <- "C:/your/file/location/here.csv"
 reference_id <- 1234567  # Replace this with your reference ID
+dev <- TRUE  # Change this to FALSE when you are done testing
 is_508_compliant <- FALSE  # If you know your file is 508 compliant, change to TRUE
+interactive <- TRUE  # If TRUE, you will be prompted to confirm file upload
 ```
 
 Double-check your reference ID! If it's incorrect, your file upload will either
@@ -64,10 +66,47 @@ uploading sensitive data to a public reference.
 Once you are certain everything is correct, perform the file upload:
 
 ```{r upload, eval = FALSE}
-result <- upload_file_to_reference(reference_id = reference_id,
-                                   file_path = file_to_upload, 
-                                   is_508 = is_508_compliant,
-                                   dev = FALSE)
+uploaded_file_info <- upload_file_to_reference(reference_id = reference_id,
+                                               file_path = file_to_upload, 
+                                               is_508 = is_508_compliant,
+                                               interactive = interactive,
+                                               dev = dev)
 ```
 
+`upload_file_to_reference` will return a list containing a direct download URL
+for your file, as well as the file ID that DataStore uses to uniquely identify
+your file.
 
+## Uploading multiple files at once
+
+If you need to upload many files to the same reference, you just need to generate
+a vector of file paths that you can iterate over.
+
+```{r list_files, eval = FALSE}
+my_folder <- "scratchpad"  # The folder containing the files you want to upload
+pattern <- "\\.csv$"  # Look for files ending in ".csv"
+my_files <- list.files(my_folder, pattern = pattern, ignore.case = TRUE, full.names = TRUE)
+```
+
+Next, use `lapply` to upload each file:
+
+```{r batch_upload, eval = FALSE}
+interactive <- FALSE  # Turn off the interactive confirmation prompt
+dev <- TRUE  # It's definitely good to test this out on irmadev first
+reference_id <- 1234567  # Replace this with your reference ID
+
+# Iterate through each file and upload it
+all_file_info <- lapply(my_files, function(file) {
+  file_info <- upload_file_to_reference(reference_id = reference_id,
+                                        file_path = file, 
+                                        is_508 = is_508_compliant,
+                                        interactive = interactive,
+                                        dev = dev)
+  return(tibble::tibble(original_file = file,
+                        url = file_info$url,
+                        file_id = file_info$file_id))
+})
+
+# Collapse uploaded file info into a single dataframe
+all_file_info <- dplyr::bind_rows(all_file_info)
+```

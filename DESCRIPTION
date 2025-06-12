@@ -16,12 +16,15 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     cli,
+    data.table,
     dplyr,
     glue,
     httr2,
     magrittr,
-    rlang
+    rlang,
+    tibble
 Depends: 
     R (>= 3.5)
 LazyData: true
 VignetteBuilder: knitr
+URL: https://nationalparkservice.github.io/NPSdatastore/
