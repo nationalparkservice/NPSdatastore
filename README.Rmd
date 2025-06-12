@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # NPSdatastore
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/nationalparkservice/NPSdatastore/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nationalparkservice/NPSdatastore/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The NPS DataStore is the official home of National Park Service (NPS) datasets, publications, and more. Use this package to search the contents of DataStore, download files, and publish new content (write access for authorized NPS users only).

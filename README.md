@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/nationalparkservice/NPSdatastore/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nationalparkservice/NPSdatastore/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The NPS DataStore is the official home of National Park Service (NPS)
