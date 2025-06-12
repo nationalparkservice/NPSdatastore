@@ -30,7 +30,7 @@ upload_file_to_reference(
 \item{retry}{How many times to retry uploading a file chunk if it fails on the first try.}
 }
 \value{
-A list of metadata for the uploaded file(s)
+A list containing the download URL and file ID for the uploaded file.
 }
 \description{
 This function is only available to NPS users on the internal network. Under

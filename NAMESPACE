@@ -3,5 +3,6 @@
 export("%>%")
 export(example_ref_ids)
 export(search_references_by_id)
+export(search_references_by_id_basic)
 export(upload_file_to_reference)
 importFrom(magrittr,"%>%")
