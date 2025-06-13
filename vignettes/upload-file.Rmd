@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(NPSdatastore)
-```
-
 ## Before you start
 
 Before attempting to upload a file to a DataStore reference, there are some
@@ -32,6 +28,12 @@ references and therefore cannot directly contain files.
 ## Testing
 
 Consider using the testing version of DataStore [https://irmadev.nps.gov/DataStore] to make sure your code works as expected before uploading to the real DataStore. This is an especially good idea if you are iterating through a large number of files.
+
+## Setup
+
+```{r setup}
+library(NPSdatastore)
+```
 
 ## Uploading the file
 
