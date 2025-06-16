@@ -3,27 +3,39 @@
 # initiate new environment accessible from within package:
 .pkgglobalenv <- new.env(parent = emptyenv())
 
-# data_store API base URL:
+# datastore API base URL:
 assign("ds_public_api",
        "https://irmaservices.nps.gov/datastore/v7/rest",
        envir = .pkgglobalenv
 )
 
-# data_store secure API base URL:
+# datastore secure API base URL:
 assign("ds_secure_api",
        "https://irmaservices.nps.gov/datastore-secure/v7/rest",
        envir = .pkgglobalenv
 )
 
-# data_store secure dev api
+# datastore secure dev api
 assign("ds_dev_secure_api",
        "https://irmadevservices.nps.gov/datastore-secure/v7/rest",
        envir = .pkgglobalenv
 )
 
-# data_store dev API
+# datastore dev API
 assign("ds_dev_public_api",
        "https://irmadevservices.nps.gov/datastore/v7/rest",
+       envir = .pkgglobalenv
+)
+
+# datastore reference URL
+assign("ds_reference_url",
+       "https://irma.nps.gov/DataStore/Reference/Profile",
+       envir = .pkgglobalenv
+)
+
+# datastore dev/testing reference URL
+assign("ds_dev_reference_url",
+       "https://irmadev.nps.gov/DataStore/Reference/Profile",
        envir = .pkgglobalenv
 )
 
@@ -48,6 +60,23 @@ globalVariables(c("public_refs",
   )
 
   return(datastore_url)
+}
+
+#' Given a reference ID, construct the URL to its profile page
+#'
+#' @param ref_id A reference ID
+#' @inheritParams .get_base_url
+#'
+#' @returns The url to the reference profile page
+#'
+.get_ref_profile_url <- function(ref_id, is_dev) {
+  ref_profile_url <- dplyr::case_when(
+    is_dev ~ get("ds_dev_reference_url", envir = .pkgglobalenv),
+    !is_dev ~ get("ds_reference_url", envir = .pkgglobalenv)
+  )
+  ref_profile_url <- paste(ref_profile_url, ref_id, sep = "/")
+
+  return(ref_profile_url)
 }
 
 #' Create httr2 request for DataStore API
