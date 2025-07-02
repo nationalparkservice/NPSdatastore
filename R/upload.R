@@ -4,8 +4,7 @@
 #' @param reference_type_code The code indicating the type of reference. See `get_reference_types()` for a full list of valid reference types.
 #' @param date_published Text string with the date of publication. MUST be in "YYYY-MM-DD", "YYYY-MM", or "YYYY" format. Often the current date, but may be earlier if the resource was previously published outside of DataStore (often the case with journal articles, newsletters, etc.).
 #' @param date_precision_code Optional. If `date_published` only specifies the year, you may optionally use this to specify a season or quarter. See `get_date_precision()` for valid options.
-#' @param dev Logical. Defaults to TRUE because it's best to test out reference creation on the development & testing version of DataStore first. Once you've verified that everything looks right, change to `dev = FALSE` and run once more to create a reference in the "real" DataStore.
-#'
+#' @inheritParams upload_file_to_reference
 #' @returns A list containing information about the uploaded reference, including reference profile URL and reference ID.
 #' @export
 #'
@@ -84,7 +83,7 @@ create_draft_reference <- function(title, reference_type_code, date_published, d
 #' @param reference_id Numeric reference ID. You must have the appropriate permissions to edit this reference.
 #' @param file_path The path to the file that you want to upload.
 #' @param is_508 Is the file 508 compliant?
-#' @param dev Logical. Defaults to TRUE because it's best to test out uploads on the development & testing version of DataStore first. Once you've verified that you're uploading the right things to the right reference, change to `dev = FALSE` and run once more to upload files to the "real" DataStore.
+#' @param dev Logical. Defaults to TRUE because it's best to attempt to modify references on the development & testing version of DataStore first. When everything is working, change to `dev = FALSE` and run again to edit the real reference.
 #' @param interactive Logical. Prompt for user confirmation before uploading?
 #' @param chunk_size_mb The "chunk" size to break the file into for upload. If your network is slow and your uploads are failing, try decreasing this number (e.g. 0.5 or 0.25).
 #' @param retry How many times to retry uploading a file chunk if it fails on the first try.

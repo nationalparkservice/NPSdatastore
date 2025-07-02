@@ -21,7 +21,7 @@ upload_file_to_reference(
 
 \item{is_508}{Is the file 508 compliant?}
 
-\item{dev}{Logical. Defaults to TRUE because it's best to test out uploads on the development & testing version of DataStore first. Once you've verified that you're uploading the right things to the right reference, change to \code{dev = FALSE} and run once more to upload files to the "real" DataStore.}
+\item{dev}{Logical. Defaults to TRUE because it's best to attempt to modify references on the development & testing version of DataStore first. When everything is working, change to \code{dev = FALSE} and run again to edit the real reference.}
 
 \item{interactive}{Logical. Prompt for user confirmation before uploading?}
 

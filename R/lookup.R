@@ -1,13 +1,12 @@
 #' Get a list of valid reference types
 #'
-#' @param dev Use the testing/development version of the API? You can almost always allow this to default to TRUE, except in specific beta testing scenarios.
+#' @inheritParams search_references_by_id
 #'
 #' @returns A tibble with columns for reference code, label, description, and group code
 #' @export
 #'
 #' @examples
 #' valid_ref_types <- get_reference_types()
-#' View(valid_ref_types)
 #'
 get_reference_types <- function(dev = FALSE) {
   # Get the full list of reference types
@@ -44,14 +43,13 @@ get_reference_types <- function(dev = FALSE) {
 
 #' Get a list of valid values for date precision
 #'
-#' @param dev Use the testing/development version of the API? You can almost always allow this to default to TRUE, except in specific beta testing scenarios.
+#' @inheritParams search_references_by_id
 #'
 #' @returns A tibble with columns for date precision code and label
 #' @export
 #'
 #' @examples
 #' valid_precisions <- get_date_precision()
-#' View(valid_precisions)
 #'
 get_date_precision <- function(dev = FALSE) {
   # Get the full list of date precision keywords

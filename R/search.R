@@ -50,9 +50,7 @@ search_references_by_id <- function(reference_ids, nps_internal = FALSE, dev = F
 #'
 #' Retrieve only basic information about each reference. To return more detailed information about references, use `search_references_by_id()` instead.
 #'
-#' @param reference_ids Numeric vector of reference IDs.
-#' @param nps_internal Logical. NPS users on the internal network can set to TRUE to authenticate and view non-public data and create or modify references. All other users can ignore this argument and allow it to default to FALSE.
-#' @param dev Logical. Set to TRUE to use the development & testing version of the API. If this means nothing to you, ignore and allow it to default to FALSE.
+#' @inheritParams search_references_by_id
 #'
 #' @returns A tibble containing basic information about each reference.
 #' @export
