@@ -41,7 +41,17 @@ assign("ds_dev_reference_url",
 
 #this gets rid of the "no visible binding for global variable 'x'" error in build checks:
 globalVariables(c("public_refs",
-                  "internal_refs"))
+                  "internal_refs",
+                  "found",
+                  "key",
+                  "ref_group_code",
+                  "searchTerm",
+                  "cn",
+                  "id_and_name",
+                  "userPrincipalName",
+                  "sn",
+                  "givenName",
+                  "mail"))
 
 
 #' Get the right base URL for the DataStore API
@@ -313,4 +323,66 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
   if (!(tolower(answer) %in% c("y", "yes"))) {
     cli::cli_abort("Operation aborted by user.", call = call)
   }
+}
+
+#' Look up emails and/or UPNs in Active Directory
+#'
+#' Only works for NPS users on the internal network. Accepts a vector of UPNs, a vector of emails, or both.
+#'
+#' @param upns A character vector of UPNs
+#' @param emails A character vector of email addresses
+#'
+#' @returns A dataframe of user information with a row for each UPN and email address searched, regardless of whether it exists in the system. If `found` is `TRUE`, the user exists. If `disabled` is `FALSE`, the user exists but has been deactivated.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' upns <- c("gmwright@nps.gov", "ymexia@nps.gov")
+#' emails <- c("enid_michael@nps.gov", "edward_abbey@nps.gov")
+#'
+#' all_users <- active_directory_lookup(upns, emails)
+#' emails_only <- active_directory_lookup(emails = emails)
+#' }
+#'
+active_directory_lookup <- function(upns, emails) {
+  base_url <- "https://irmaservices.nps.gov/adverification/v1/rest"
+
+  user_info <- tibble::tibble()
+
+  if (!missing(upns)) {
+    upns <- paste0('"', upns, '"', collapse = ", ")  # collapse into a single string, quoted and comma separated
+    upns <- paste0("[", upns, "]")  # surround with square brackets
+    upn_lookup <- httr2::request(base_url) |>
+      httr2::req_url_path_append("lookup", "upn") |>
+      httr2::req_body_raw(upns) |>
+      httr2::req_headers(Accept = "application/json",
+                         `Content-Type` = "application/json") |>
+      httr2::req_options(httpauth = 4L, userpwd = ":::") |>
+      httr2::req_perform()
+
+    upn_info <- httr2::resp_body_json(upn_lookup)
+
+    upn_info <- suppressWarnings(data.table::rbindlist(upn_info, use.names = TRUE, fill = TRUE))
+    user_info <- tibble::as_tibble(upn_info)
+  }
+
+  if (!missing(emails)) {
+    emails <- paste0('"', emails, '"', collapse = ", ")  # collapse into a single string, quoted and comma separated
+    emails <- paste0("[", emails, "]")  # surround with square brackets
+    email_lookup <- httr2::request(base_url) |>
+      httr2::req_url_path_append("lookup", "email") |>
+      httr2::req_body_raw(emails) |>
+      httr2::req_headers(Accept = "application/json",
+                         `Content-Type` = "application/json") |>
+      httr2::req_options(httpauth = 4L, userpwd = ":::") |>
+      httr2::req_perform()
+
+    email_info <- httr2::resp_body_json(email_lookup)
+
+    email_info <- suppressWarnings(data.table::rbindlist(email_info, use.names = TRUE, fill = TRUE))
+    email_info <- tibble::as_tibble(email_info)
+    user_info <- rbind(user_info, email_info)
+  }
+
+  return(user_info)
 }

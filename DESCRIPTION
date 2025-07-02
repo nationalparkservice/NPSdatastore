@@ -20,8 +20,10 @@ Imports:
     dplyr,
     glue,
     httr2,
+    lubridate,
     magrittr,
     rlang,
+    stringr,
     tibble
 Depends: 
     R (>= 3.5)

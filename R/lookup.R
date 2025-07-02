@@ -65,3 +65,28 @@ get_date_precision <- function(dev = FALSE) {
   return(precisions)
 }
 
+#' List the owners of a DataStore reference
+#'
+#' Only available for NPS users on the internal network.
+#'
+#' @param reference_id Numeric. The reference ID for a single DataStore reference.
+#' @inheritParams search_references_by_id
+#'
+#' @returns A tibble with the username, last name, first name, and email of each reference owner.
+#' @export
+#'
+#' @examples
+#' owners <- get_reference_owners(reference_id = 652358)
+#'
+get_reference_owners <- function(reference_id, dev = FALSE) {
+  owners <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "Owners") |>
+    httr2::req_perform()
+
+  owners <- httr2::resp_body_json(owners)
+
+  owners <- suppressWarnings(data.table::rbindlist(owners, use.names = TRUE, fill = TRUE))
+  owners <- tibble::as_tibble(owners)
+
+  return(owners)
+}
