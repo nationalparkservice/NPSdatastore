@@ -57,7 +57,6 @@ create_draft_reference <- function(title, reference_type_code, date_published, d
     httr2::req_url_path_append("Reference", "CreateDraft") |>
     httr2::req_body_json(request_body,
                          type = "application/json") |>
-    httr2::req_error(is_error = \(resp) FALSE) |>
     httr2::req_perform()
 
   .validate_resp(new_ref,
@@ -130,7 +129,6 @@ upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, de
     httr2::req_body_json(list(Name = file_name,
                               Is508Compliant = is_508),
                          type = "application/json") |>
-    httr2::req_error(is_error = \(resp) FALSE) |>
     httr2::req_perform()
 
   .validate_resp(upload_token,

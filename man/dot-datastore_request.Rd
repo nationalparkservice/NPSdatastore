@@ -4,7 +4,7 @@
 \alias{.datastore_request}
 \title{Create httr2 request for DataStore API}
 \usage{
-.datastore_request(is_secure, is_dev)
+.datastore_request(is_secure, is_dev, suppress_errors = TRUE)
 }
 \arguments{
 \item{is_secure}{Retrieve the secure version of the API base URL?}

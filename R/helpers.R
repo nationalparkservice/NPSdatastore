@@ -95,13 +95,17 @@ globalVariables(c("public_refs",
 #'
 #' @returns A httr2 request object with curl options set to allow authentication for NPS users (if using secure API)
 #'
-.datastore_request <- function(is_secure, is_dev) {
+.datastore_request <- function(is_secure, is_dev, suppress_errors = TRUE) {
   base_url <- .get_base_url(is_secure = is_secure, is_dev = is_dev)
 
   request <- httr2::request(base_url)
 
   if (is_secure) {
     request <- httr2::req_options(request, httpauth = 4L, userpwd = ":::")
+  }
+
+  if (suppress_errors) {
+    request <- httr2::req_error(request, is_error = \(resp) FALSE)
   }
 
   return(request)
@@ -122,6 +126,8 @@ globalVariables(c("public_refs",
     httr2::req_url_path_append("Profile") |>
     httr2::req_url_query(q = reference_ids, .multi = "comma") |>
     httr2::req_perform()
+
+  .validate_resp(request)
 
   response <- httr2::resp_body_json(request)
 
@@ -279,9 +285,7 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
     cli::cli_abort("{.arg {arg}} cannot be less than zero.",
                    call = call)
   }
-
 }
-
 
 .validate_resp <- function(resp,
                            nice_msg_400,

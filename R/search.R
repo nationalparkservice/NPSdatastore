@@ -19,6 +19,8 @@ search_references_by_id <- function(reference_ids, nps_internal = FALSE, dev = F
 
   reference_ids <- unique(reference_ids)  # Make sure there aren't duplicate IDs
 
+  .validate_ref_id(reference_ids, multiple_ok = TRUE)
+
   # The DataStore API only returns reference profiles for a maximum of 25 IDs,
   # so we have to make multiple requests if there are more than 25
   n_requests <- ceiling(length(reference_ids)/25)
@@ -67,11 +69,15 @@ search_references_by_id_basic <- function(reference_ids, nps_internal = FALSE, d
 
   reference_ids <- unique(reference_ids)  # Make sure there aren't duplicate IDs
 
+  .validate_ref_id(reference_ids, multiple_ok = TRUE)
+
   # Perform the request
   request <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
     httr2::req_url_path_append("ReferenceCodeSearch") |>
     httr2::req_url_query(q = reference_ids, .multi = "comma") |>
     httr2::req_perform()
+
+  .validate_resp(request)
 
   references <- httr2::resp_body_json(request)
 

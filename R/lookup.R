@@ -14,6 +14,8 @@ get_reference_types <- function(dev = FALSE) {
     httr2::req_url_path_append("FixedList/ReferenceTypes") |>
     httr2::req_perform()
 
+  .validate_resp(ref_types)
+
   ref_types <- httr2::resp_body_json(ref_types)
 
   ref_types <- dplyr::bind_rows(ref_types) |>
@@ -25,6 +27,8 @@ get_reference_types <- function(dev = FALSE) {
   ref_groups <- .datastore_request(is_secure = FALSE, is_dev = dev) |>
     httr2::req_url_path_append("FixedList/ReferenceTypeGroups") |>
     httr2::req_perform()
+
+  .validate_resp(ref_groups)
 
   ref_groups <- httr2::resp_body_json(ref_groups)
 
@@ -57,6 +61,8 @@ get_date_precision <- function(dev = FALSE) {
     httr2::req_url_path_append("FixedList/DatePrecisions") |>
     httr2::req_perform()
 
+  .validate_resp(precisions)
+
   precisions <- httr2::resp_body_json(precisions)
 
   precisions <- dplyr::bind_rows(precisions) |>
@@ -79,9 +85,14 @@ get_date_precision <- function(dev = FALSE) {
 #' owners <- get_reference_owners(reference_id = 652358)
 #'
 get_reference_owners <- function(reference_id, dev = FALSE) {
+
+  .validate_ref_id(reference_id)
+
   owners <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
     httr2::req_url_path_append("Reference", reference_id, "Owners") |>
     httr2::req_perform()
+
+  .validate_resp(owners)
 
   owners <- httr2::resp_body_json(owners)
 
@@ -89,4 +100,63 @@ get_reference_owners <- function(reference_id, dev = FALSE) {
   owners <- tibble::as_tibble(owners)
 
   return(owners)
+}
+
+#' Retrieve the keywords for a DataStore reference
+#'
+#' @param reference_id Numeric. The reference ID for a single DataStore reference.
+#' @inheritParams search_references_by_id
+#'
+#' @returns A character vector of keywords.
+#' @export
+#'
+#' @examples
+#' owners <- get_keywords(reference_id = 652358)
+#'
+get_keywords <- function(reference_id, nps_internal = FALSE, dev = FALSE) {
+
+  .validate_ref_id(reference_id)
+
+  keywords <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "Keywords") |>
+    httr2::req_perform()
+
+  .validate_resp(keywords)
+
+  keywords <- httr2::resp_body_json(keywords)
+
+  keywords <- unlist(keywords)
+  keywords <- trimws(keywords, which = "both")
+
+  return(keywords)
+}
+
+#' Retrieve the external links from a DataStore reference
+#'
+#' @param reference_id Numeric. The reference ID for a single DataStore reference.
+#' @inheritParams search_references_by_id
+#'
+#' @returns A tibble with columns userSort, resourceId, lastUpdate, description, uri, and lastVerified.
+#' @export
+#'
+#' @examples
+#' links <- get_external_links(reference_id = 652358)
+#'
+get_external_links <- function(reference_id, nps_internal = FALSE, dev = FALSE) {
+
+  .validate_ref_id(reference_id)
+
+  links <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "ExternalLinks") |>
+    httr2::req_method("GET") |>
+    httr2::req_perform()
+
+  .validate_resp(links)
+
+  links <- httr2::resp_body_json(links)
+
+  links <- suppressWarnings(data.table::rbindlist(links, use.names = TRUE, fill = TRUE))
+  links <- tibble::as_tibble(links)
+
+  return(links)
 }
