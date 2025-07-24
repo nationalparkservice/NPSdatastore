@@ -32,12 +32,12 @@ create_draft_reference <- function(title, reference_type_code, date_published, d
 
   if (grepl("^[0-9]{4}-[0-9]{2}-[0-9]{2}$", date_published)) {
     date_published <- list(year = lubridate::year(date_published),
-                        month = lubridate::month(date_published),
-                        day = lubridate::day(date_published))
+                           month = lubridate::month(date_published),
+                           day = lubridate::day(date_published))
   } else if (grepl("^[0-9]{4}-[0-9]{2}$", date_published)) {
     date_published <- paste0(date_published, "-01")  # add a dummy day so that lubridate parses it
     date_published <- list(year = lubridate::year(date_published),
-                        month = lubridate::month(date_published))
+                           month = lubridate::month(date_published))
   } else if (grepl("^[0-9]{4}$", date_published)) {
     date_published <- list(year = as.numeric(date_published))
     if (!missing(date_precision_code)) {
@@ -133,7 +133,7 @@ upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, de
 
   .validate_resp(upload_token,
                  nice_msg_400 = "Could not retrieve upload token. This usually happens if you don't have permissions to edit the reference or if you are not connected to the DOI/NPS network."
-                 )
+  )
 
   upload_url <- upload_token$headers$Location
 
@@ -209,5 +209,229 @@ upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, de
                     file_id = httr2::resp_body_json(upload_resp))
 
   return(file_info)
+}
+
+#' Add owners to a DataStore reference
+#'
+#' @inheritParams active_directory_lookup
+#' @inheritParams upload_file_to_reference
+#'
+#' @returns A tibble of all reference owners with columns userCode, lastName, firstName, and email
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' upns <- c("gmwright@nps.gov", "ymexia@nps.gov")
+#' emails <- c("enid_michael@nps.gov", "edward_abbey@nps.gov")
+#'
+#' all_owners <- add_reference_owners(reference_id = 00000, upns = upns, emails = emails, dev = TRUE)
+#'
+#' }
+#'
+add_reference_owners <- function(reference_id, upns, emails, dev = TRUE, interactive = TRUE) {
+
+  .validate_ref_id(reference_id)
+
+  # Verify emails and UPNs with the AD verification API
+  user_info <- active_directory_lookup(upns = upns, emails = emails)
+  # Filter valid users
+  valid_users <- dplyr::filter(user_info, found & !disabled)
+
+  # Validate user identifiers
+  if (nrow(user_info) > nrow(valid_users)) {
+
+    # list users not found
+    not_found <- dplyr::filter(user_info, !found)
+    if (nrow(not_found) > 0) {
+      not_found <- not_found %>%
+        dplyr::pull(searchTerm) %>%
+        stringr::str_flatten_comma(last = ", and ")
+      not_found <- paste("user identifier(s) do not exist: ", not_found)
+    } else {
+      not_found <- NULL
+    }
+
+    # list deactivated users
+    disabled <- dplyr::filter(user_info, disabled)
+    if (nrow(disabled) > 0) {
+      disabled <- disabled %>%
+        dplyr::mutate(id_and_name = paste0(searchTerm, " (", cn, ")")) %>%
+        dplyr::pull(id_and_name) %>%
+        stringr::str_flatten_comma(last = ", and ")
+      disabled <- paste("user(s) exist but are deactivated:", disabled)
+    } else {
+      disabled <- NULL
+    }
+
+    msg <- c(disabled, not_found)
+
+    if (nrow(valid_users) > 0) {
+      names(msg) <- rep("!", length(msg))
+      cli::cli_warn(c("The following users could not be added as owners because... ",
+                      msg))  # If there are some valid users, just throw a warning
+    } else {
+      names(msg) <- rep("x", length(msg))
+      cli::cli_abort(c("No users could be added as owners because... ",
+                       msg))  # If there are no valid users, throw an error
+    }
+  }
+
+  # Verify that we're modifying the right reference
+  if (interactive) {
+    .user_validate_ref_title(ref_id = reference_id,
+                             is_secure = TRUE,
+                             is_dev = dev)
+  }
+
+  # Actually add the owners, finally
+
+  # Get userCode (UPN), lastName, firstName, and email
+  valid_users <- dplyr::select(valid_users,
+                               userCode = userPrincipalName,
+                               lastName = sn,
+                               firstName = givenName,
+                               email = mail)
+  valid_users <- apply(valid_users, MARGIN = 1, FUN = as.list)
+
+  added_owners <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "Owners") |>
+    httr2::req_body_json(valid_users) |>
+    httr2::req_perform()
+
+  .validate_resp(added_owners)
+
+  all_owners <- httr2::resp_body_json(added_owners)
+  all_owners <- suppressWarnings(data.table::rbindlist(all_owners, use.names = TRUE, fill = TRUE))
+  all_owners <- tibble::as_tibble(all_owners)
+
+  return(all_owners)
+}
+
+
+#' Add keywords to a DataStore reference
+#'
+#' @param keywords A character vector of keywords
+#' @inheritParams upload_file_to_reference
+#'
+#' @returns A character vector of all keywords for the reference
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' my_keywords <- c("bison", "human-wildlife conflict", "visitor injuries")
+#' all_keywords <- add_keywords(reference_id = 00000, keywords = my_keywords, dev = TRUE)
+#' }
+#'
+add_keywords <- function(reference_id, keywords, dev = TRUE, interactive = TRUE) {
+  .validate_ref_id(reference_id)
+
+  # Verify that we're modifying the right reference
+  if (interactive) {
+    .user_validate_ref_title(ref_id = reference_id,
+                             is_secure = TRUE,
+                             is_dev = dev)
+  }
+
+  # Add the keywords
+  added_keywords <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "Keywords") |>
+    httr2::req_body_json(as.list(keywords)) |>
+    httr2::req_method("POST") |>
+    httr2::req_perform()
+
+  .validate_resp(added_keywords)
+
+  all_keywords <- httr2::resp_body_json(added_keywords)
+  added_keywords <- unlist(all_keywords)
+
+  return(added_keywords)
+}
+
+
+#' Add external links to a DataStore reference
+#'
+#' @param url The full URL you wish to add as an external link. Web URLs must start with "https://".
+#' @param description A description of the external link.
+#' @param last_verified Character. The date in ISO 8601 format (e.g. "2025-07-21") when the URL was last verified to be correct and working. You can almost always allow this to default to the current date.
+#' @inheritParams upload_file_to_reference
+#'
+#' @returns A list of information about the link that was added
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' link_added <- add_external_link(reference_id = 00000, url = "https://www.nps.gov/im", description = "I&M homepage", dev = TRUE)
+#' }
+#'
+add_external_link <- function(reference_id, url, description, last_verified = format(Sys.Date(), "%Y-%m-%d"), dev = TRUE, interactive = TRUE) {
+
+  .validate_ref_id(reference_id)
+
+  # Verify that we're modifying the right reference
+  if (interactive) {
+    .user_validate_ref_title(ref_id = reference_id,
+                             is_secure = TRUE,
+                             is_dev = dev)
+  }
+
+  links <- list(resourceId = 0,
+                          userSort = 0,
+                          description = description,
+                          uri = url,
+                          lastVerified = last_verified)
+
+  added_link <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "ExternalLinks") |>
+    httr2::req_body_json(links) |>
+    httr2::req_method("POST") |>
+    httr2::req_perform()
+
+  .validate_resp(added_link, nice_msg_500 = httr2::resp_body_json(added_link)$exceptionMessage)
+
+  link_info <- httr2::resp_body_json(added_link)
+
+  return(link_info)
+}
+
+#' Replace the bibliography in a DataStore reference
+#'
+#' @param bibliography A list representing a DataStore bibliography. It is recommended that you retrieve the current bibliography using `get_bibliography()` and then modify it as needed.
+#' @inheritParams upload_file_to_reference
+#'
+#' @returns A list representing the new bibliography.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' bib <- get_bibliography(reference_id = 00000)
+#' bib$description <- "This is a new description for this reference"
+#' bib$notes <- "This reference is for testing purposes only"
+#' new_bib <- add_bibliography(reference_id = 00000, bibliography = bib, dev = TRUE)
+#' }
+#'
+add_bibliography <- function(reference_id, bibliography, dev = TRUE, interactive = TRUE) {
+
+  .validate_ref_id(reference_id)
+
+  # Verify that we're modifying the right reference
+  if (interactive) {
+    .user_validate_ref_title(ref_id = reference_id,
+                             is_secure = TRUE,
+                             is_dev = dev)
+  }
+
+  names(bibliography) <- stringr::str_replace(names(bibliography), pattern = "^description$", "abstract")
+
+  bib <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "Bibliography") |>
+    httr2::req_body_json(bibliography) |>
+    httr2::req_method("PUT") |>
+    httr2::req_perform()
+
+  .validate_resp(bib)
+
+  bib <- httr2::resp_body_json(bib)
+
+  return(bib)
 }
 

@@ -138,7 +138,7 @@ globalVariables(c("public_refs",
   response <- lapply(response, function(ref) {
     ref <- .lists2vectors(ref, to_vectors)
     ref <- .lists2tibbles(ref, to_tibbles)
-
+    names(ref$bibliography) <- stringr::str_replace(names(ref$bibliography), pattern = "^abstract$", "description")  # rename "abstract" to "description"
     return(ref)
   })
 
