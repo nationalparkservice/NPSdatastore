@@ -431,6 +431,7 @@ add_bibliography <- function(reference_id, bibliography, dev = TRUE, interactive
   .validate_resp(bib)
 
   bib <- httr2::resp_body_json(bib)
+  bib <- stringr::str_replace(names(bib), pattern = "^abstract$", "description")
 
   return(bib)
 }
