@@ -268,7 +268,9 @@ get_external_links <- function(reference_id, nps_internal = FALSE, dev = FALSE) 
 #' @export
 #'
 #' @examples
-#' bib <- get_bibliography(reference_id = 652358)
+#' \dontrun{
+#'   bib <- get_bibliography(reference_id = 652358)
+#' }
 #'
 get_bibliography <- function(reference_id, nps_internal = FALSE, dev = FALSE) {
 

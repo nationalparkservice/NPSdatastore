@@ -92,6 +92,7 @@ globalVariables(c("public_refs",
 #' Create httr2 request for DataStore API
 #'
 #' @inheritParams .get_base_url
+#' @param suppress_errors Suppress HTTP errors? Set to TRUE if using `.validate_resp()`
 #'
 #' @returns A httr2 request object with curl options set to allow authentication for NPS users (if using secure API)
 #'

@@ -1,6 +1,6 @@
 Package: NPSdatastore
 Title: R Interface for the National Park Service DataStore API
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person(c("Sarah", "E."), "Wright", email = "sarah_wright@nps.gov", role = c("aut", "cre"))
 Description: Interact with the National Park Service (NPS) DataStore in R. NPS DataStore is the official home of NPS datasets, publications, and more. Use this package to search the contents of DataStore, download files, and publish new content (authorized users only).

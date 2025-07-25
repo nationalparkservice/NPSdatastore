@@ -20,6 +20,8 @@ A list containing bibliographic information.
 Retrieve the bibliographic information from a DataStore reference
 }
 \examples{
-bib <- get_bibliography(reference_id = 652358)
+\dontrun{
+  bib <- get_bibliography(reference_id = 652358)
+}
 
 }

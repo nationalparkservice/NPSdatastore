@@ -360,7 +360,10 @@ add_keywords <- function(reference_id, keywords, dev = TRUE, interactive = TRUE)
 #'
 #' @examples
 #' \dontrun{
-#' link_added <- add_external_link(reference_id = 00000, url = "https://www.nps.gov/im", description = "I&M homepage", dev = TRUE)
+#' link_added <- add_external_link(reference_id = 00000,
+#' url = "https://www.nps.gov/im",
+#' description = "I&M homepage",
+#' dev = TRUE)
 #' }
 #'
 add_external_link <- function(reference_id, url, description, last_verified = format(Sys.Date(), "%Y-%m-%d"), dev = TRUE, interactive = TRUE) {

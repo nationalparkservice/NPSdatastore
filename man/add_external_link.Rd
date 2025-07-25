@@ -34,7 +34,10 @@ Add external links to a DataStore reference
 }
 \examples{
 \dontrun{
-link_added <- add_external_link(reference_id = 00000, url = "https://www.nps.gov/im", description = "I&M homepage", dev = TRUE)
+link_added <- add_external_link(reference_id = 00000,
+url = "https://www.nps.gov/im",
+description = "I&M homepage",
+dev = TRUE)
 }
 
 }
