@@ -439,3 +439,44 @@ add_bibliography <- function(reference_id, bibliography, dev = TRUE, interactive
   return(bib)
 }
 
+#' Add DataStore reference(s) to a Project reference
+#'
+#' @param project_id The reference ID of the Project
+#' @inheritParams search_references_by_id
+#'
+#' @returns A character vector of all keywords for the reference
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   proj_id <- 1111111
+#'   ref_ids <- c(000000, 222222)
+#'   add_to_project(project_id = proj_id,
+#'                  reference_ids = ref_ids,
+#'                  dev = TRUE)
+#' }
+#'
+add_to_project <- function(project_id, reference_ids, dev = TRUE, interactive = TRUE) {
+  .validate_ref_id(project_id)
+  .validate_ref_id(reference_ids, multiple_ok = TRUE)
+
+  # Verify that we're modifying the right reference
+  if (interactive) {
+    .user_validate_ref_title(ref_id = project_id,
+                             is_secure = TRUE,
+                             is_dev = dev)
+  }
+
+  # Add the references to the project
+  added_refs <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", project_id, "ProductReference") |>
+    httr2::req_body_json(as.list(reference_ids)) |>
+    httr2::req_method("POST") |>
+    httr2::req_perform()
+
+  .validate_resp(added_refs)
+
+  added_refs <- httr2::resp_body_json(added_refs)
+
+  return(added_refs)
+}
