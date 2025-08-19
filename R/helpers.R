@@ -3,33 +3,55 @@
 # initiate new environment accessible from within package:
 .pkgglobalenv <- new.env(parent = emptyenv())
 
-# data_store API base URL:
+# datastore API base URL:
 assign("ds_public_api",
        "https://irmaservices.nps.gov/datastore/v7/rest",
        envir = .pkgglobalenv
 )
 
-# data_store secure API base URL:
+# datastore secure API base URL:
 assign("ds_secure_api",
        "https://irmaservices.nps.gov/datastore-secure/v7/rest",
        envir = .pkgglobalenv
 )
 
-# data_store secure dev api
+# datastore secure dev api
 assign("ds_dev_secure_api",
        "https://irmadevservices.nps.gov/datastore-secure/v7/rest",
        envir = .pkgglobalenv
 )
 
-# data_store dev API
+# datastore dev API
 assign("ds_dev_public_api",
        "https://irmadevservices.nps.gov/datastore/v7/rest",
        envir = .pkgglobalenv
 )
 
+# datastore reference URL
+assign("ds_reference_url",
+       "https://irma.nps.gov/DataStore/Reference/Profile",
+       envir = .pkgglobalenv
+)
+
+# datastore dev/testing reference URL
+assign("ds_dev_reference_url",
+       "https://irmadev.nps.gov/DataStore/Reference/Profile",
+       envir = .pkgglobalenv
+)
+
 #this gets rid of the "no visible binding for global variable 'x'" error in build checks:
 globalVariables(c("public_refs",
-                  "internal_refs"))
+                  "internal_refs",
+                  "found",
+                  "key",
+                  "ref_group_code",
+                  "searchTerm",
+                  "cn",
+                  "id_and_name",
+                  "userPrincipalName",
+                  "sn",
+                  "givenName",
+                  "mail"))
 
 
 #' Get the right base URL for the DataStore API
@@ -50,19 +72,41 @@ globalVariables(c("public_refs",
   return(datastore_url)
 }
 
+#' Given a reference ID, construct the URL to its profile page
+#'
+#' @param ref_id A reference ID
+#' @inheritParams .get_base_url
+#'
+#' @returns The url to the reference profile page
+#'
+.get_ref_profile_url <- function(ref_id, is_dev) {
+  ref_profile_url <- dplyr::case_when(
+    is_dev ~ get("ds_dev_reference_url", envir = .pkgglobalenv),
+    !is_dev ~ get("ds_reference_url", envir = .pkgglobalenv)
+  )
+  ref_profile_url <- paste(ref_profile_url, ref_id, sep = "/")
+
+  return(ref_profile_url)
+}
+
 #' Create httr2 request for DataStore API
 #'
 #' @inheritParams .get_base_url
+#' @param suppress_errors Suppress HTTP errors? Set to TRUE if using `.validate_resp()`
 #'
 #' @returns A httr2 request object with curl options set to allow authentication for NPS users (if using secure API)
 #'
-.datastore_request <- function(is_secure, is_dev) {
+.datastore_request <- function(is_secure, is_dev, suppress_errors = TRUE) {
   base_url <- .get_base_url(is_secure = is_secure, is_dev = is_dev)
 
   request <- httr2::request(base_url)
 
   if (is_secure) {
     request <- httr2::req_options(request, httpauth = 4L, userpwd = ":::")
+  }
+
+  if (suppress_errors) {
+    request <- httr2::req_error(request, is_error = \(resp) FALSE)
   }
 
   return(request)
@@ -84,6 +128,8 @@ globalVariables(c("public_refs",
     httr2::req_url_query(q = reference_ids, .multi = "comma") |>
     httr2::req_perform()
 
+  .validate_resp(request)
+
   response <- httr2::resp_body_json(request)
 
   # Clean up reference profiles - simplify some lists to vectors and some to tibbles
@@ -93,7 +139,7 @@ globalVariables(c("public_refs",
   response <- lapply(response, function(ref) {
     ref <- .lists2vectors(ref, to_vectors)
     ref <- .lists2tibbles(ref, to_tibbles)
-
+    names(ref$bibliography) <- stringr::str_replace(names(ref$bibliography), pattern = "^abstract$", "description")  # rename "abstract" to "description"
     return(ref)
   })
 
@@ -240,9 +286,7 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
     cli::cli_abort("{.arg {arg}} cannot be less than zero.",
                    call = call)
   }
-
 }
-
 
 .validate_resp <- function(resp,
                            nice_msg_400,
@@ -284,4 +328,66 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
   if (!(tolower(answer) %in% c("y", "yes"))) {
     cli::cli_abort("Operation aborted by user.", call = call)
   }
+}
+
+#' Look up emails and/or UPNs in Active Directory
+#'
+#' Only works for NPS users on the internal network. Accepts a vector of UPNs, a vector of emails, or both.
+#'
+#' @param upns A character vector of UPNs
+#' @param emails A character vector of email addresses
+#'
+#' @returns A dataframe of user information with a row for each UPN and email address searched, regardless of whether it exists in the system. If `found` is `TRUE`, the user exists. If `disabled` is `FALSE`, the user exists but has been deactivated.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' upns <- c("gmwright@nps.gov", "ymexia@nps.gov")
+#' emails <- c("enid_michael@nps.gov", "edward_abbey@nps.gov")
+#'
+#' all_users <- active_directory_lookup(upns, emails)
+#' emails_only <- active_directory_lookup(emails = emails)
+#' }
+#'
+active_directory_lookup <- function(upns, emails) {
+  base_url <- "https://irmaservices.nps.gov/adverification/v1/rest"
+
+  user_info <- tibble::tibble()
+
+  if (!missing(upns)) {
+    upns <- paste0('"', upns, '"', collapse = ", ")  # collapse into a single string, quoted and comma separated
+    upns <- paste0("[", upns, "]")  # surround with square brackets
+    upn_lookup <- httr2::request(base_url) |>
+      httr2::req_url_path_append("lookup", "upn") |>
+      httr2::req_body_raw(upns) |>
+      httr2::req_headers(Accept = "application/json",
+                         `Content-Type` = "application/json") |>
+      httr2::req_options(httpauth = 4L, userpwd = ":::") |>
+      httr2::req_perform()
+
+    upn_info <- httr2::resp_body_json(upn_lookup)
+
+    upn_info <- suppressWarnings(data.table::rbindlist(upn_info, use.names = TRUE, fill = TRUE))
+    user_info <- tibble::as_tibble(upn_info)
+  }
+
+  if (!missing(emails)) {
+    emails <- paste0('"', emails, '"', collapse = ", ")  # collapse into a single string, quoted and comma separated
+    emails <- paste0("[", emails, "]")  # surround with square brackets
+    email_lookup <- httr2::request(base_url) |>
+      httr2::req_url_path_append("lookup", "email") |>
+      httr2::req_body_raw(emails) |>
+      httr2::req_headers(Accept = "application/json",
+                         `Content-Type` = "application/json") |>
+      httr2::req_options(httpauth = 4L, userpwd = ":::") |>
+      httr2::req_perform()
+
+    email_info <- httr2::resp_body_json(email_lookup)
+
+    email_info <- suppressWarnings(data.table::rbindlist(email_info, use.names = TRUE, fill = TRUE))
+    email_info <- tibble::as_tibble(email_info)
+    user_info <- rbind(user_info, email_info)
+  }
+
+  return(user_info)
 }

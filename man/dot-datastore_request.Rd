@@ -4,12 +4,14 @@
 \alias{.datastore_request}
 \title{Create httr2 request for DataStore API}
 \usage{
-.datastore_request(is_secure, is_dev)
+.datastore_request(is_secure, is_dev, suppress_errors = TRUE)
 }
 \arguments{
 \item{is_secure}{Retrieve the secure version of the API base URL?}
 
 \item{is_dev}{Retrieve the dev version of the API base URL?}
+
+\item{suppress_errors}{Suppress HTTP errors? Set to TRUE if using \code{.validate_resp()}}
 }
 \value{
 A httr2 request object with curl options set to allow authentication for NPS users (if using secure API)

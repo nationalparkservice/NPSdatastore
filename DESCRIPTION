@@ -1,8 +1,8 @@
 Package: NPSdatastore
 Title: R Interface for the National Park Service DataStore API
-Version: 0.0.0.9000
+Version: 0.0.0.9002
 Authors@R: 
-    person(c("Sarah", "E."), "Wright", email = "sarah_wright@nps.gov", role = c("aut", "cre"))
+    person(c("Sarah", "E."), "Wright", email = "sarah_wright@nps.gov", role = c("aut", "cre"), comment = c(ORCID = "0009-0004-5060-2189"))
 Description: Interact with the National Park Service (NPS) DataStore in R. NPS DataStore is the official home of NPS datasets, publications, and more. Use this package to search the contents of DataStore, download files, and publish new content (authorized users only).
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -20,11 +20,14 @@ Imports:
     dplyr,
     glue,
     httr2,
+    lubridate,
     magrittr,
     rlang,
+    stringr,
     tibble
 Depends: 
     R (>= 3.5)
 LazyData: true
 VignetteBuilder: knitr
-URL: https://nationalparkservice.github.io/NPSdatastore/
+URL: https://nationalparkservice.github.io/NPSdatastore/, https://github.com/nationalparkservice/NPSdatastore
+BugReports: https://github.com/nationalparkservice/NPSdatastore/issues
