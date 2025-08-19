@@ -480,3 +480,43 @@ add_to_project <- function(project_id, reference_ids, dev = TRUE, interactive = 
 
   return(added_refs)
 }
+
+#' Set the license for a DataStore reference
+#'
+#' Any existing license will be overwritten.
+#'
+#' @param license_type_id The numeric ID of the license you wish to apply.
+#' @inheritParams upload_file_to_reference
+#'
+#' @returns A list of the referenceId and the licenseTypeId
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' new_bib <- add_license(000000,
+#'                        license_id = 1)  # CC0 license
+#' }
+#'
+set_license <- function(reference_id, license_type_id, dev = TRUE, interactive = TRUE) {
+
+  .validate_ref_id(reference_id)
+
+  # Verify that we're modifying the right reference
+  if (interactive) {
+    .user_validate_ref_title(ref_id = reference_id,
+                             is_secure = TRUE,
+                             is_dev = dev)
+  }
+
+  added_license <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "LicenseType") |>
+    httr2::req_body_json(list(LicenseTypeId = license_type_id)) |>
+    httr2::req_method("PUT") |>
+    httr2::req_perform()
+
+  .validate_resp(added_license)
+
+  license_info <- httr2::resp_body_json(added_license)
+
+  return(license_info)
+}
