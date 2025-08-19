@@ -1,0 +1,9 @@
+pandoc: '3.4'
+pkgdown: 2.1.2
+pkgdown_sha: ~
+articles:
+  upload-file: upload-file.html
+last_built: 2025-08-19T15:11Z
+urls:
+  reference: https://nationalparkservice.github.io/NPSdatastore/reference
+  article: https://nationalparkservice.github.io/NPSdatastore/articles
