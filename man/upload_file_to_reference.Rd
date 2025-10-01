@@ -8,6 +8,7 @@ upload_file_to_reference(
   reference_id,
   file_path,
   is_508 = FALSE,
+  description,
   dev = TRUE,
   interactive = TRUE,
   chunk_size_mb = 1,
@@ -21,6 +22,8 @@ upload_file_to_reference(
 
 \item{is_508}{Is the file 508 compliant?}
 
+\item{description}{A short description of the file}
+
 \item{dev}{Logical. Defaults to TRUE because it's best to attempt to modify references on the development & testing version of DataStore first. When everything is working, change to \code{dev = FALSE} and run again to edit the real reference.}
 
 \item{interactive}{Logical. Prompt for user confirmation before uploading?}
@@ -30,7 +33,7 @@ upload_file_to_reference(
 \item{retry}{How many times to retry uploading a file chunk if it fails on the first try.}
 }
 \value{
-A list containing the download URL and file ID for the uploaded file.
+A tibble containing information about the uploaded file.
 }
 \description{
 This function is only available to NPS users on the internal network. Under

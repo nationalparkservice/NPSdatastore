@@ -12,6 +12,8 @@ add_to_project(project_id, reference_ids, dev = TRUE, interactive = TRUE)
 \item{reference_ids}{Numeric vector of reference IDs.}
 
 \item{dev}{Logical. Set to TRUE to use the development & testing version of the API. If this means nothing to you, ignore and allow it to default to FALSE.}
+
+\item{interactive}{Logical. Prompt for user confirmation before uploading?}
 }
 \value{
 A character vector of all keywords for the reference

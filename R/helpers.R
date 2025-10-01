@@ -51,7 +51,18 @@ globalVariables(c("public_refs",
                   "userPrincipalName",
                   "sn",
                   "givenName",
-                  "mail"))
+                  "mail",
+                  "lastUpdate",
+                  "userSort",
+                  "resourceId",
+                  "description",
+                  "fileName",
+                  "fileSize",
+                  "extension",
+                  "mimeType",
+                  "downloadLink",
+                  "is508Compliant",
+                  "fileSize_kb"))
 
 
 #' Get the right base URL for the DataStore API
