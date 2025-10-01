@@ -255,7 +255,74 @@ get_external_links <- function(reference_id, nps_internal = FALSE, dev = FALSE) 
   links <- suppressWarnings(data.table::rbindlist(links, use.names = TRUE, fill = TRUE))
   links <- tibble::as_tibble(links)
 
+  if (nrow(links) > 0) {
+    links <- links |>
+      dplyr::mutate(lastUpdate = lubridate::ymd_hms(lastUpdate)) |>
+      dplyr::arrange(userSort)
+  }
+
   return(links)
+}
+
+#' Retrieve information about files associated with a DataStore reference
+#'
+#' @inheritParams upload_file_to_reference
+#' @inheritParams search_references_by_id
+#' @param file_id Optional. Omit to retrieve info for all files in the reference. Unique ID (sometimes referred to as "resource ID" in DataStore) corresponding to the file you would like information about.
+#'
+#' @returns A tibble with columns userSort, resourceId, lastUpdate, description, fileName, fileSize_kb, extension, mimeType, downloadLink, and is508Compliant. Returns a zero-length tibble if no files exist.
+#' @export
+#'
+#' @examples
+#' all_files <- get_file_info(reference_id = 652358)
+#' specific_file <- get_file_info(reference_id = 2305163, file_id = 706913)
+#'
+get_file_info <- function(reference_id, file_id, nps_internal = FALSE, dev = FALSE) {
+
+  .validate_ref_id(reference_id)
+
+  if (missing(file_id)) {
+    files <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
+      httr2::req_url_path_append("Reference", reference_id, "DigitalFiles") |>
+      httr2::req_method("GET") |>
+      httr2::req_perform()
+  } else {
+    files <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
+      httr2::req_url_path_append("Reference", reference_id, "DigitalFiles", file_id) |>
+      httr2::req_method("GET") |>
+      httr2::req_perform()
+  }
+
+  .validate_resp(files)
+
+  files <- httr2::resp_body_json(files)
+
+  if (!missing(file_id)) {
+    # when getting file info by file id, need to nest results in a length 1 list to keep structure consistent for rbindlist
+    files <- list(files)
+  }
+  files <- suppressWarnings(data.table::rbindlist(files, use.names = TRUE, fill = TRUE))
+  files <- tibble::as_tibble(files)
+
+  if (nrow(files) > 0) {
+    files <- files |>
+      dplyr::select(userSort,
+                    resourceId,
+                    lastUpdate,
+                    description,
+                    fileName,
+                    fileSize_kb = fileSize,
+                    extension,
+                    mimeType,
+                    downloadLink,
+                    is508Compliant
+      ) |>
+      dplyr::mutate(fileSize_kb = fileSize_kb/1024,
+                    lastUpdate = lubridate::ymd_hms(lastUpdate)) |>
+      dplyr::arrange(userSort)
+  }
+
+  return(files)
 }
 
 

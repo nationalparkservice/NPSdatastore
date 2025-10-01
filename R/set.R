@@ -79,15 +79,15 @@ create_draft_reference <- function(title, reference_type_code, date_published, d
 #' time. This decreases the likelihood of failure for large files on slow
 #' networks.
 #'
+#' @inheritParams set_file_info
 #' @param reference_id Numeric reference ID. You must have the appropriate permissions to edit this reference.
 #' @param file_path The path to the file that you want to upload.
-#' @param is_508 Is the file 508 compliant?
 #' @param dev Logical. Defaults to TRUE because it's best to attempt to modify references on the development & testing version of DataStore first. When everything is working, change to `dev = FALSE` and run again to edit the real reference.
 #' @param interactive Logical. Prompt for user confirmation before uploading?
 #' @param chunk_size_mb The "chunk" size to break the file into for upload. If your network is slow and your uploads are failing, try decreasing this number (e.g. 0.5 or 0.25).
 #' @param retry How many times to retry uploading a file chunk if it fails on the first try.
 #'
-#' @returns A list containing the download URL and file ID for the uploaded file.
+#' @returns A tibble containing information about the uploaded file.
 #' @export
 #'
 #' @examples
@@ -101,7 +101,7 @@ create_draft_reference <- function(title, reference_type_code, date_published, d
 #'                                    chunk_size_mb = 1)
 #' }
 #'
-upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, dev = TRUE, interactive = TRUE, chunk_size_mb = 1, retry = 1) {
+upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, description, dev = TRUE, interactive = TRUE, chunk_size_mb = 1, retry = 1) {
 
   # Validate arguments
   .validate_ref_id(ref_id = reference_id, multiple_ok = FALSE)
@@ -204,9 +204,82 @@ upload_file_to_reference <- function(reference_id, file_path, is_508 = FALSE, de
 
   close(file_con)
 
-  # TODO: Return details on uploaded file
   file_info <- list(url = upload_resp$headers$Location,
                     file_id = httr2::resp_body_json(upload_resp))
+
+  # Add a file description if provided
+  if (!missing(description)) {
+    all_files <- set_file_info(reference_id, file_info$file_id, description = description, dev = dev, interactive = FALSE)
+  }
+
+  file_info <- get_file_info(reference_id, file_info$file_id, nps_internal = nps_internal, dev = dev)
+
+  return(file_info)
+}
+
+
+#' Set file information
+#'
+#' @inheritParams upload_file_to_reference
+#' @param file_id The unique identifier for the file. Also referred to as the resource ID.
+#' @param description A short description of the file
+#' @param is_508 Is the file 508 compliant?
+#'
+#' @returns A tibble containing the updated file information.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   set_file_info(2313985, file_id = 731902, description = "testing 123")
+#' }
+#'
+set_file_info <- function(reference_id, file_id, description, is_508, dev = TRUE, interactive = TRUE) {
+  # Validate arguments
+  .validate_ref_id(ref_id = reference_id, multiple_ok = FALSE)
+
+  # Set values
+  nps_internal <- TRUE
+  if (!missing(is_508)) {
+    is_508 <- dplyr::case_when(is_508 ~ 'true',
+                               .default = 'false')  # convert is_508 to a string for the API
+  }
+
+  # Verify that we're modifying the right reference
+  if (interactive) {
+    .user_validate_ref_title(ref_id = reference_id,
+                             is_secure = nps_internal,
+                             is_dev = dev)
+  }
+
+  file_info <- get_file_info(reference_id, file_id, nps_internal = nps_internal, dev = dev) |>
+    dplyr::select(resourceId,
+                  userSort,
+                  description,
+                  Is508Compliant = is508Compliant) |>
+    as.list()
+
+  if (!missing(description) && !is.null(description) && nchar(description) > 0) {
+    file_info$description <- trimws(description, which = "both")
+  }
+  if (!missing(is_508)) {
+    file_info$Is508Compliant <- is_508
+  }
+  # TODO: Add userSort option (currently not working right in the API)
+
+  desc_resp <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "DigitalFiles") |>
+    httr2::req_body_json(file_info,
+                         type = "application/json") |>
+    httr2::req_method("PUT") |>
+    httr2::req_perform()
+
+  .validate_resp(desc_resp,
+                 nice_msg_400 = "Could not update file info.")
+
+  file_info <- get_file_info(reference_id = reference_id,
+                             file_id = file_id,
+                             nps_internal = nps_internal,
+                             dev = dev)
 
   return(file_info)
 }
@@ -443,6 +516,7 @@ add_bibliography <- function(reference_id, bibliography, dev = TRUE, interactive
 #'
 #' @param project_id The reference ID of the Project
 #' @inheritParams search_references_by_id
+#' @inheritParams upload_file_to_reference
 #'
 #' @returns A character vector of all keywords for the reference
 #' @export
