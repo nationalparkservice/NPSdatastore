@@ -400,5 +400,11 @@ active_directory_lookup <- function(upns, emails) {
     user_info <- rbind(user_info, email_info)
   }
 
+  hyphen_regex <- "(\u002D|\u02D7|\u2010|\u2011|\u2012|\u2013|\u2014|\u2212|\uFE58|\uFE63|\uFF0D)"  # allow for all kinds of hyphens in orcid
+  orcid_regex <- paste(rep("[0-9]{4}", 4), collapse = hyphen_regex)  # create regex to match an orcid: 16 digits with a hyphen every 4 digits
+  user_info <- user_info |>
+    dplyr::rename(orcid = extensionAttribute2) |>  # extensionAttribute2 is user's orcid
+    dplyr::mutate(orcid = stringr::str_extract(orcid, orcid_regex))  # orcids can be formatted inconsistently, so strip out just the 16-digit ID
+
   return(user_info)
 }
