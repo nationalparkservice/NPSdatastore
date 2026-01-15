@@ -471,6 +471,8 @@ add_external_link <- function(reference_id, url, description, last_verified = fo
 
 #' Replace the bibliography in a DataStore reference
 #'
+#' To update specific elements of the bibliography, use the "set_" functions for those elements instead.
+#'
 #' @param bibliography A list representing a DataStore bibliography. It is recommended that you retrieve the current bibliography using `get_bibliography()` and then modify it as needed.
 #' @inheritParams upload_file_to_reference
 #'
@@ -482,10 +484,10 @@ add_external_link <- function(reference_id, url, description, last_verified = fo
 #' bib <- get_bibliography(reference_id = 00000)
 #' bib$description <- "This is a new description for this reference"
 #' bib$notes <- "This reference is for testing purposes only"
-#' new_bib <- add_bibliography(reference_id = 00000, bibliography = bib, dev = TRUE)
+#' new_bib <- set_bibliography(reference_id = 00000, bibliography = bib, dev = TRUE)
 #' }
 #'
-add_bibliography <- function(reference_id, bibliography, dev = TRUE, interactive = TRUE) {
+set_bibliography <- function(reference_id, bibliography, dev = TRUE, interactive = TRUE) {
 
   .validate_ref_id(reference_id)
 
@@ -508,6 +510,52 @@ add_bibliography <- function(reference_id, bibliography, dev = TRUE, interactive
 
   bib <- httr2::resp_body_json(bib)
   bib <- stringr::str_replace(names(bib), pattern = "^abstract$", "description")
+
+  return(bib)
+}
+
+#' Indicate whether a reference was created by or for NPS
+#'
+#' @param by_for_nps TRUE or FALSE: was this reference created by or for NPS?
+#' @inheritParams upload_file_to_reference
+#'
+#' @returns A list representing the full updated bibliography.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' new_bib <- set_by_for_nps(reference_id = 000000, by_for_nps = TRUE)
+#' new_bib <- set_by_for_nps(reference_id = 000000, by_for_nps = TRUE, dev = FALSE)
+#' }
+set_by_for_nps <- function(reference_id, by_for_nps, dev = TRUE, interactive = TRUE) {
+
+  # Validate arguments
+  .validate_truefalse(by_for_nps)
+
+  # Set values
+  nps_internal <- TRUE
+  is_508 <- dplyr::case_when(by_for_nps ~ 'true',
+                             !by_for_nps ~ 'false',
+                             .default = NA_character_)  # convert by_for_nps to a string for the API
+
+  # Verify that we're modifying the right reference
+  if (interactive) {
+    .user_validate_ref_title(ref_id = reference_id,
+                             is_secure = TRUE,
+                             is_dev = dev)
+  }
+
+  body <- list(isAgencyOriginated = by_for_nps)
+
+  bib <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "Bibliography") |>
+    httr2::req_body_json(body) |>
+    httr2::req_method("PATCH") |>
+    httr2::req_perform()
+
+  .validate_resp(bib)
+
+  bib <- httr2::resp_body_json(bib)
 
   return(bib)
 }
@@ -593,4 +641,61 @@ set_license <- function(reference_id, license_type_id, dev = TRUE, interactive =
   license_info <- httr2::resp_body_json(added_license)
 
   return(license_info)
+}
+
+
+#' Activate a reference
+#'
+#' @inheritParams upload_file_to_reference
+#'
+#' @returns Invisibly returns the current lifecycle information for the reference
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   lifecycle_info <- set_lifecycle_active(reference_id = 652358)
+#' }
+#'
+set_lifecycle_active <- function(reference_id, dev = TRUE, interactive = TRUE) {
+  .validate_ref_id(reference_id)
+
+  lifecycle_info <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "Lifecycle", "Active") |>
+    httr2::req_body_json(list()) |>
+    httr2::req_method("PUT") |>
+    httr2::req_perform()
+
+  .validate_resp(lifecycle_info)
+
+  lifecycle_info <- get_lifecycle_info(reference_id = reference_id, nps_internal = TRUE, dev = dev)
+
+  invisible(lifecycle_info)
+}
+
+#' Set a reference to draft mode
+#'
+#' @inheritParams upload_file_to_reference
+#'
+#' @returns Invisibly returns the current lifecycle information for the reference
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   lifecycle_info <- set_lifecycle_draft(reference_id = 652358)
+#' }
+#'
+set_lifecycle_draft <- function(reference_id, dev = TRUE, interactive = TRUE) {
+  .validate_ref_id(reference_id)
+
+  lifecycle_info <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "Lifecycle", "Draft") |>
+    httr2::req_body_json(list()) |>
+    httr2::req_method("PUT") |>
+    httr2::req_perform()
+
+  .validate_resp(lifecycle_info)
+
+  lifecycle_info <- get_lifecycle_info(reference_id = reference_id, nps_internal = TRUE, dev = dev)
+
+  invisible(lifecycle_info)
 }

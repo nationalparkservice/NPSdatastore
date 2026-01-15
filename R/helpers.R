@@ -5,25 +5,25 @@
 
 # datastore API base URL:
 assign("ds_public_api",
-       "https://irmaservices.nps.gov/datastore/v7/rest",
+       "https://irmaservices.nps.gov/datastore/v8/rest",
        envir = .pkgglobalenv
 )
 
 # datastore secure API base URL:
 assign("ds_secure_api",
-       "https://irmaservices.nps.gov/datastore-secure/v7/rest",
+       "https://irmaservices.nps.gov/datastore-secure/v8/rest",
        envir = .pkgglobalenv
 )
 
 # datastore secure dev api
 assign("ds_dev_secure_api",
-       "https://irmadevservices.nps.gov/datastore-secure/v7/rest",
+       "https://irmadevservices.nps.gov/datastore-secure/v8/rest",
        envir = .pkgglobalenv
 )
 
 # datastore dev API
 assign("ds_dev_public_api",
-       "https://irmadevservices.nps.gov/datastore/v7/rest",
+       "https://irmadevservices.nps.gov/datastore/v8/rest",
        envir = .pkgglobalenv
 )
 
@@ -284,6 +284,24 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
     cli::cli_abort("{.arg {arg}} must include a filename (e.g. \"data.csv\"). It looks like you provided the path to a folder instead.",
                    call = call)
   }
+}
+
+#' Validate TRUE/FALSE arguments
+#'
+#' @param bool Value to check
+#' @param arg Used to get the actual name of the argument in the calling function. See `?rlang::`topic-error-call``
+#' @param call The caller environment, for more helpful error messages. See `?rlang::`topic-error-call``
+#'
+.validate_truefalse <- function(bool,
+                             arg = rlang::caller_arg(bool),
+                             call = rlang::caller_env()) {
+
+  # Enforce a TRUE/FALSE value
+  if (!is.logical(bool) || is.na(bool)) {
+    cli::cli_abort("{.arg {arg}} is invalid. Must be logical (`TRUE` or `FALSE`).",
+                   call = call)
+  }
+
 }
 
 .validate_retry <- function(retry,
