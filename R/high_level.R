@@ -12,16 +12,25 @@
 #'
 #'
 #'
-#' @param reference_id String. Typically a seven-digit code
+#' @param reference_id Integer. Typically a seven-digit code
 #' @param by_for_NPS Logical. Defaults to TRUE
-#' @param life_cycle String. Defaults to "status quo". Acceptable alternatives are "Active" and "Draft"
-#' @param nps_internal Logical. Defaults to TRUE
-#' @param dev Logical. Defaults to TRUE..
+#' @param life_cycle String. Defaults to "Status Quo". Acceptable alternatives are "Active" and "Draft".
+#' @param nps_internal Logical. Defaults to TRUE. Must be TRUE for most write actions.
+#' @param dev Logical. Target the development server? Defaults to TRUE. False will target the production server.
 #'
 #' @returns a dataframe
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#'  nps_status <- set_by_for_nps_list(reference_id = c(1234567,
+#'                                                     7654321,
+#'                                                     0000000),
+#'                                    by_for_nps = TRUE,
+#'                                    life_cycle = "Status Quo",
+#'                                    nps_internal = TRUE,
+#'                                    dev = TRUE)
+#'                                    }
 set_by_for_nps_list <- function(reference_id,
                        by_for_nps = TRUE,
                        life_cycle = c("Status Quo", "Active", "Draft"),

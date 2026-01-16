@@ -7,7 +7,6 @@
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/LICENSE-text.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/LICENSE.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/active_directory_lookup.html</loc></url>
-<url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/add_bibliography.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/add_external_link.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/add_keywords.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/add_reference_owners.html</loc></url>
@@ -22,12 +21,15 @@
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/dot-lists2tibbles.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/dot-lists2vectors.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/dot-validate_ref_id.html</loc></url>
+<url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/dot-validate_truefalse.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/example_ref_ids.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/get_bibliography.html</loc></url>
+<url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/get_by_for_nps.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/get_date_precision.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/get_external_links.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/get_file_info.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/get_keywords.html</loc></url>
+<url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/get_lifecycle_info.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/get_reference_owners.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/get_reference_types.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/index.html</loc></url>
@@ -36,8 +38,13 @@
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/public_refs.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/search_references_by_id.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/search_references_by_id_basic.html</loc></url>
+<url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/set_bibliography.html</loc></url>
+<url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/set_by_for_nps.html</loc></url>
+<url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/set_by_for_nps_list.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/set_file_info.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/set_license.html</loc></url>
+<url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/set_lifecycle_active.html</loc></url>
+<url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/set_lifecycle_draft.html</loc></url>
 <url><loc>https://nationalparkservice.github.io/NPSdatastore/reference/upload_file_to_reference.html</loc></url>
 </urlset>
 
