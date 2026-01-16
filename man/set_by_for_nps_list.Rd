@@ -15,13 +15,13 @@ set_by_for_nps_list(
 \arguments{
 \item{reference_id}{Integer. Typically a seven-digit code}
 
+\item{by_for_nps}{Logical. Defaults to TRUE}
+
 \item{life_cycle}{String. Defaults to "Status Quo". Acceptable alternatives are "Active" and "Draft".}
 
 \item{nps_internal}{Logical. Defaults to TRUE. Must be TRUE for most write actions.}
 
 \item{dev}{Logical. Target the development server? Defaults to TRUE. False will target the production server.}
-
-\item{by_for_NPS}{Logical. Defaults to TRUE}
 }
 \value{
 a dataframe
