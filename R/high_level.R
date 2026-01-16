@@ -13,7 +13,7 @@
 #'
 #'
 #' @param reference_id Integer. Typically a seven-digit code
-#' @param by_for_NPS Logical. Defaults to TRUE
+#' @param by_for_nps Logical. Defaults to TRUE
 #' @param life_cycle String. Defaults to "Status Quo". Acceptable alternatives are "Active" and "Draft".
 #' @param nps_internal Logical. Defaults to TRUE. Must be TRUE for most write actions.
 #' @param dev Logical. Target the development server? Defaults to TRUE. False will target the production server.
