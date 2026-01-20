@@ -96,16 +96,18 @@ set_by_for_nps_list <- function(reference_id,
                                 nps_internal = TRUE,
                                 dev = dev)
 
-
+      #reference profile url:
+      ref_url <- .get_ref_profile_url(reference_id[i], is_dev = dev)
 
       #create and populate df to be returned:
       dat2 <- data.frame(reference_id[i],
                          For_NPS,
                          lifecycle_status_initial,
-                         lifecycle_status_final)
+                         lifecycle_status_final,
+                         ref_url)
       dat1 <- rbind(dat1, dat2)
    }
   #colnames(dat1) <- c('reference_id', 'For_NPS', 'Lifecycle_initial', 'Lifecycle_final', "reference_url")
-  colnames(dat1) <- c('reference_id', 'For_NPS', 'Lifecycle_initial', 'Lifecycle_final')
+  colnames(dat1) <- c('reference_id', 'For_NPS', 'Lifecycle_initial', 'Lifecycle_final', 'url')
   return(dat1)
 }
