@@ -2,14 +2,13 @@
 % Please edit documentation in R/get.R
 \name{get_lifecycle_info}
 \alias{get_lifecycle_info}
-\title{Retrieve the current lifecycle status of a reference}
+\title{Retrieve the current lifecycle status of a reference.
+Only works for internal NPS users.}
 \usage{
-get_lifecycle_info(reference_id, nps_internal = FALSE, dev = FALSE)
+get_lifecycle_info(reference_id, dev = FALSE)
 }
 \arguments{
 \item{reference_id}{Numeric reference ID. You must have the appropriate permissions to edit this reference.}
-
-\item{nps_internal}{Logical. NPS users on the internal network can set to TRUE to authenticate and view non-public data and create or modify references. All other users can ignore this argument and allow it to default to FALSE.}
 
 \item{dev}{Logical. Defaults to TRUE because it's best to attempt to modify references on the development & testing version of DataStore first. When everything is working, change to \code{dev = FALSE} and run again to edit the real reference.}
 }
@@ -17,7 +16,8 @@ get_lifecycle_info(reference_id, nps_internal = FALSE, dev = FALSE)
 A list of lifecycle information for the reference
 }
 \description{
-Retrieve the current lifecycle status of a reference
+Retrieve the current lifecycle status of a reference.
+Only works for internal NPS users.
 }
 \examples{
 \dontrun{

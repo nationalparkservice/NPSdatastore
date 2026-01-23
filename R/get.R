@@ -375,7 +375,8 @@ get_by_for_nps <- function(reference_id, nps_internal = FALSE, dev = FALSE) {
   return(by_for_nps)
 }
 
-#' Retrieve the current lifecycle status of a reference
+#' Retrieve the current lifecycle status of a reference.
+#' Only works for internal NPS users.
 #'
 #' @inheritParams get_bibliography
 #'
@@ -388,8 +389,10 @@ get_by_for_nps <- function(reference_id, nps_internal = FALSE, dev = FALSE) {
 #'   lifecycle = lifecycle_info$lifecycle
 #' }
 #'
-get_lifecycle_info <- function(reference_id, nps_internal = FALSE, dev = FALSE) {
+get_lifecycle_info <- function(reference_id, dev = FALSE) {
   .validate_ref_id(reference_id)
+
+  nps_internal <- TRUE
 
   lifecycle_info <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
     httr2::req_url_path_append("Reference", reference_id, "LifecycleConstraints") |>

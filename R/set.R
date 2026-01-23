@@ -531,10 +531,11 @@ set_by_for_nps <- function(reference_id, by_for_nps, dev = TRUE, interactive = T
 
   # Validate arguments
   .validate_truefalse(by_for_nps)
+  .validate_ref_id(reference_id)
 
   # Set values
   nps_internal <- TRUE
-  is_508 <- dplyr::case_when(by_for_nps ~ 'true',
+  by_for_nps <- dplyr::case_when(by_for_nps ~ 'true',
                              !by_for_nps ~ 'false',
                              .default = NA_character_)  # convert by_for_nps to a string for the API
 
@@ -544,6 +545,10 @@ set_by_for_nps <- function(reference_id, by_for_nps, dev = TRUE, interactive = T
                              is_secure = TRUE,
                              is_dev = dev)
   }
+
+  # Check current lifecycle status so we can validate
+  orig_lifecycle <- get_lifecycle_info(reference_id = reference_id, dev = dev)
+  orig_lifecycle <- orig_lifecycle$lifecycle
 
   body <- list(isAgencyOriginated = by_for_nps)
 
@@ -667,7 +672,7 @@ set_lifecycle_active <- function(reference_id, dev = TRUE, interactive = TRUE) {
 
   .validate_resp(lifecycle_info)
 
-  lifecycle_info <- get_lifecycle_info(reference_id = reference_id, nps_internal = TRUE, dev = dev)
+  lifecycle_info <- get_lifecycle_info(reference_id = reference_id, dev = dev)
 
   invisible(lifecycle_info)
 }
@@ -695,7 +700,7 @@ set_lifecycle_draft <- function(reference_id, dev = TRUE, interactive = TRUE) {
 
   .validate_resp(lifecycle_info)
 
-  lifecycle_info <- get_lifecycle_info(reference_id = reference_id, nps_internal = TRUE, dev = dev)
+  lifecycle_info <- get_lifecycle_info(reference_id = reference_id, dev = dev)
 
   invisible(lifecycle_info)
 }
