@@ -26,6 +26,7 @@ networks."></head><body>
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/upload-file.html">Upload a File to DataStore</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/nationalparkservice/NPSdatastore/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -109,7 +110,7 @@ networks.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">id</span> <span class="op">&lt;-</span> <span class="fl">12345</span>  <span class="co"># The ID of a reference you have edit permissions to</span></span></span>
 <span class="r-in"><span><span class="va">upload</span> <span class="op">&lt;-</span> <span class="fu">upload_file_to_reference</span><span class="op">(</span>reference_id <span class="op">=</span> <span class="va">id</span>,</span></span>
-<span class="r-in"><span>                                   file_path <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"my_file.csv"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                                   file_path <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/here/man/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"my_file.csv"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                   is_508 <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                                   dev <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                                   interactive <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
@@ -127,7 +128,7 @@ networks.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

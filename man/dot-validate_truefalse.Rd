@@ -20,3 +20,4 @@
 \description{
 Validate TRUE/FALSE arguments
 }
+\keyword{internal}

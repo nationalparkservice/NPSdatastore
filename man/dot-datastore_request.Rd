@@ -19,3 +19,4 @@ A httr2 request object with curl options set to allow authentication for NPS use
 \description{
 Create httr2 request for DataStore API
 }
+\keyword{internal}

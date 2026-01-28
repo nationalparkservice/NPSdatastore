@@ -20,6 +20,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/upload-file.html">Upload a File to DataStore</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/nationalparkservice/NPSdatastore/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -35,12 +36,258 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="retrieve-data-metadata">Retrieve Data &amp; Metadata<a class="anchor" aria-label="anchor" href="#retrieve-data-metadata"></a></h2>
+
+
+
+      <dl></dl></div><div class="section level2">
+
+      <h3 id="publicly-accessible">Publicly accessible<a class="anchor" aria-label="anchor" href="#publicly-accessible"></a></h3>
+      <div class="section-desc"><p>Functions for retrieving files and metadata from DataStore. If you are not an internal NPS user, you can still use these functions to access publicly available information on DataStore. NPS users can set <code>nps_internal = TRUE</code> to access restricted references as well.</p></div>
+
+      <dl></dl></div><div class="section level2">
 
 
 
 
-    </div><div class="section level2">
+      <dl><dt>
+
+          <code><a href="search_references_by_id.html">search_references_by_id()</a></code>
+
+        </dt>
+        <dd>Search NPS DataStore references by their ID</dd>
+
+        <dt>
+
+          <code><a href="search_references_by_id_basic.html">search_references_by_id_basic()</a></code>
+
+        </dt>
+        <dd>Search NPS DataStore references by ID</dd>
+
+        <dt>
+
+          <code><a href="get_bibliography.html">get_bibliography()</a></code>
+
+        </dt>
+        <dd>Retrieve the bibliographic information from a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="get_by_for_nps.html">get_by_for_nps()</a></code>
+
+        </dt>
+        <dd>Determine if a reference was created by/for the NPS</dd>
+
+        <dt>
+
+          <code><a href="get_date_precision.html">get_date_precision()</a></code>
+
+        </dt>
+        <dd>Get a list of valid values for date precision</dd>
+
+        <dt>
+
+          <code><a href="get_external_links.html">get_external_links()</a></code>
+
+        </dt>
+        <dd>Retrieve the external links from a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="get_file_info.html">get_file_info()</a></code>
+
+        </dt>
+        <dd>Retrieve information about files associated with a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="get_keywords.html">get_keywords()</a></code>
+
+        </dt>
+        <dd>Retrieve the keywords for a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="get_reference_owners.html">get_reference_owners()</a></code>
+
+        </dt>
+        <dd>List the owners of a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="get_reference_types.html">get_reference_types()</a></code>
+
+        </dt>
+        <dd>Get a list of valid reference types</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="internal-only">Internal only<a class="anchor" aria-label="anchor" href="#internal-only"></a></h3>
+
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="get_lifecycle_info.html">get_lifecycle_info()</a></code>
+
+        </dt>
+        <dd>Retrieve the current lifecycle status of a reference. Only works for internal NPS users.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="create-and-modify-references">Create and Modify References<a class="anchor" aria-label="anchor" href="#create-and-modify-references"></a></h2>
+
+
+
+      <dl></dl></div><div class="section level2">
+
+      <h3 id="internal-only-1">Internal only<a class="anchor" aria-label="anchor" href="#internal-only-1"></a></h3>
+      <div class="section-desc"><p>Functions for creating and modifying references in DataStore. These functions only work for internal NPS users. Note that by default, these functions will use the development and testing version of DataStore to avoid accidental changes to real references. Always test your code before switching to <code>dev = FALSE</code>! When in doubt, contact the DataStore team (<a href="mailto:NRSS_datastore@nps.gov" class="email">NRSS_datastore@nps.gov</a>) for help.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="create_draft_reference.html">create_draft_reference()</a></code>
+
+        </dt>
+        <dd>Create a new draft reference</dd>
+
+        <dt>
+
+          <code><a href="upload_file_to_reference.html">upload_file_to_reference()</a></code>
+
+        </dt>
+        <dd>Upload file to an existing DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="add_external_link.html">add_external_link()</a></code>
+
+        </dt>
+        <dd>Add external links to a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="add_keywords.html">add_keywords()</a></code>
+
+        </dt>
+        <dd>Add keywords to a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="add_reference_owners.html">add_reference_owners()</a></code>
+
+        </dt>
+        <dd>Add owners to a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="add_to_project.html">add_to_project()</a></code>
+
+        </dt>
+        <dd>Add DataStore reference(s) to a Project reference</dd>
+
+        <dt>
+
+          <code><a href="set_bibliography.html">set_bibliography()</a></code>
+
+        </dt>
+        <dd>Replace the bibliography in a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="set_by_for_nps.html">set_by_for_nps()</a></code>
+
+        </dt>
+        <dd>Indicate whether a reference was created by or for NPS</dd>
+
+        <dt>
+
+          <code><a href="set_file_info.html">set_file_info()</a></code>
+
+        </dt>
+        <dd>Set file information</dd>
+
+        <dt>
+
+          <code><a href="set_license.html">set_license()</a></code>
+
+        </dt>
+        <dd>Set the license for a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="set_lifecycle_active.html">set_lifecycle_active()</a></code>
+
+        </dt>
+        <dd>Activate a reference</dd>
+
+        <dt>
+
+          <code><a href="set_lifecycle_draft.html">set_lifecycle_draft()</a></code>
+
+        </dt>
+        <dd>Set a reference to draft mode</dd>
+
+        <dt>
+
+          <code><a href="delete_all_keywords.html">delete_all_keywords()</a></code>
+
+        </dt>
+        <dd>Delete all keywords from a DataStore reference</dd>
+
+        <dt>
+
+          <code><a href="delete_reference_owner.html">delete_reference_owner()</a></code>
+
+        </dt>
+        <dd>Delete an owner from a DataStore reference</dd>
+      </dl></div><div class="section level2">
+      <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+
+
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="example_ref_ids.html">example_ref_ids()</a></code>
+
+        </dt>
+        <dd>Retrieve some valid DataStore reference IDs</dd>
+
+        <dt>
+
+          <code><a href="public_refs.html">public_refs</a></code>
+
+        </dt>
+        <dd>Reference IDs for public-facing references</dd>
+
+        <dt>
+
+          <code><a href="internal_refs.html">internal_refs</a></code>
+
+        </dt>
+        <dd>Reference IDs for internal-facing references</dd>
+      </dl></div><div class="section level2">
+      <h2 id="miscellaneous">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous"></a></h2>
+
+
+
+      <dl></dl></div><div class="section level2">
+
+      <h3 id="internal-only-2">Internal only<a class="anchor" aria-label="anchor" href="#internal-only-2"></a></h3>
+
+
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -51,188 +298,9 @@
 
         </dt>
         <dd>Look up emails and/or UPNs in Active Directory</dd>
-      </dl><dl><dt>
-
-          <code><a href="add_bibliography.html">add_bibliography()</a></code>
-
-        </dt>
-        <dd>Replace the bibliography in a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="add_external_link.html">add_external_link()</a></code>
-
-        </dt>
-        <dd>Add external links to a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="add_keywords.html">add_keywords()</a></code>
-
-        </dt>
-        <dd>Add keywords to a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="add_reference_owners.html">add_reference_owners()</a></code>
-
-        </dt>
-        <dd>Add owners to a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="add_to_project.html">add_to_project()</a></code>
-
-        </dt>
-        <dd>Add DataStore reference(s) to a Project reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="create_draft_reference.html">create_draft_reference()</a></code>
-
-        </dt>
-        <dd>Create a new draft reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="delete_all_keywords.html">delete_all_keywords()</a></code>
-
-        </dt>
-        <dd>Delete all keywords from a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="delete_reference_owner.html">delete_reference_owner()</a></code>
-
-        </dt>
-        <dd>Delete an owner from a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="dot-datastore_request.html">.datastore_request()</a></code>
-
-        </dt>
-        <dd>Create httr2 request for DataStore API</dd>
-      </dl><dl><dt>
-
-          <code><a href="dot-get_base_url.html">.get_base_url()</a></code>
-
-        </dt>
-        <dd>Get the right base URL for the DataStore API</dd>
-      </dl><dl><dt>
-
-          <code><a href="dot-get_reference_profiles.html">.get_reference_profiles()</a></code>
-
-        </dt>
-        <dd>Perform a single request to the Profile endpoint and tidy the data a little</dd>
-      </dl><dl><dt>
-
-          <code><a href="dot-get_ref_profile_url.html">.get_ref_profile_url()</a></code>
-
-        </dt>
-        <dd>Given a reference ID, construct the URL to its profile page</dd>
-      </dl><dl><dt>
-
-          <code><a href="dot-lists2tibbles.html">.lists2tibbles()</a></code>
-
-        </dt>
-        <dd>Convert lists in a reference profile to tibbles</dd>
-      </dl><dl><dt>
-
-          <code><a href="dot-lists2vectors.html">.lists2vectors()</a></code>
-
-        </dt>
-        <dd>Convert lists in a reference profile to vectors</dd>
-      </dl><dl><dt>
-
-          <code><a href="dot-validate_ref_id.html">.validate_ref_id()</a></code>
-
-        </dt>
-        <dd>Validate reference ID arguments</dd>
-      </dl><dl><dt>
-
-          <code><a href="example_ref_ids.html">example_ref_ids()</a></code>
-
-        </dt>
-        <dd>Retrieve some valid DataStore reference IDs</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_bibliography.html">get_bibliography()</a></code>
-
-        </dt>
-        <dd>Retrieve the bibliographic information from a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_date_precision.html">get_date_precision()</a></code>
-
-        </dt>
-        <dd>Get a list of valid values for date precision</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_external_links.html">get_external_links()</a></code>
-
-        </dt>
-        <dd>Retrieve the external links from a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_file_info.html">get_file_info()</a></code>
-
-        </dt>
-        <dd>Retrieve information about files associated with a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_keywords.html">get_keywords()</a></code>
-
-        </dt>
-        <dd>Retrieve the keywords for a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_reference_owners.html">get_reference_owners()</a></code>
-
-        </dt>
-        <dd>List the owners of a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_reference_types.html">get_reference_types()</a></code>
-
-        </dt>
-        <dd>Get a list of valid reference types</dd>
-      </dl><dl><dt>
-
-          <code><a href="internal_refs.html">internal_refs</a></code>
-
-        </dt>
-        <dd>Reference IDs for internal-facing references</dd>
-      </dl><dl><dt>
-
-          <code><a href="public_refs.html">public_refs</a></code>
-
-        </dt>
-        <dd>Reference IDs for public-facing references</dd>
-      </dl><dl><dt>
-
-          <code><a href="search_references_by_id.html">search_references_by_id()</a></code>
-
-        </dt>
-        <dd>Search NPS DataStore references by their ID</dd>
-      </dl><dl><dt>
-
-          <code><a href="search_references_by_id_basic.html">search_references_by_id_basic()</a></code>
-
-        </dt>
-        <dd>Search NPS DataStore references by ID</dd>
-      </dl><dl><dt>
-
-          <code><a href="set_file_info.html">set_file_info()</a></code>
-
-        </dt>
-        <dd>Set file information</dd>
-      </dl><dl><dt>
-
-          <code><a href="set_license.html">set_license()</a></code>
-
-        </dt>
-        <dd>Set the license for a DataStore reference</dd>
-      </dl><dl><dt>
-
-          <code><a href="upload_file_to_reference.html">upload_file_to_reference()</a></code>
-
-        </dt>
-        <dd>Upload file to an existing DataStore reference</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
@@ -240,7 +308,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

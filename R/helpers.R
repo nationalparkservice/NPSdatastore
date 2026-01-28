@@ -62,7 +62,9 @@ globalVariables(c("public_refs",
                   "mimeType",
                   "downloadLink",
                   "is508Compliant",
-                  "fileSize_kb"))
+                  "fileSize_kb",
+                  "extensionAttribute2",
+                  "orcid"))
 
 
 #' Get the right base URL for the DataStore API
@@ -71,6 +73,7 @@ globalVariables(c("public_refs",
 #' @param is_dev Retrieve the dev version of the API base URL?
 #'
 #' @returns One of four base URLs for the DataStore API (public, secure, public+dev, secure+dev)
+#' @keywords internal
 #'
 .get_base_url <- function(is_secure, is_dev) {
   datastore_url <- dplyr::case_when(
@@ -89,6 +92,7 @@ globalVariables(c("public_refs",
 #' @inheritParams .get_base_url
 #'
 #' @returns The url to the reference profile page
+#' @keywords internal
 #'
 .get_ref_profile_url <- function(ref_id, is_dev) {
   ref_profile_url <- dplyr::case_when(
@@ -106,6 +110,7 @@ globalVariables(c("public_refs",
 #' @param suppress_errors Suppress HTTP errors? Set to TRUE if using `.validate_resp()`
 #'
 #' @returns A httr2 request object with curl options set to allow authentication for NPS users (if using secure API)
+#' @keywords internal
 #'
 .datastore_request <- function(is_secure, is_dev, suppress_errors = TRUE) {
   base_url <- .get_base_url(is_secure = is_secure, is_dev = is_dev)
@@ -132,6 +137,7 @@ globalVariables(c("public_refs",
 #' @inheritParams .get_base_url
 #'
 #' @returns List of reference profiles
+#' @keywords internal
 #'
 .get_reference_profiles <- function(reference_ids, is_secure, is_dev) {
   request <- .datastore_request(is_secure = is_secure, is_dev = is_dev) |>
@@ -169,6 +175,7 @@ globalVariables(c("public_refs",
 #' @param child_list_names The elements of the reference profile that should be converted to vectors
 #'
 #' @returns The tidied reference profile
+#' @keywords internal
 #'
 .lists2vectors <- function(parent_list, child_list_names) {
   for (child_list in child_list_names) {
@@ -188,6 +195,7 @@ globalVariables(c("public_refs",
 #' @param child_list_names The elements of the reference profile that should be converted to tibbles
 #'
 #' @returns The tidied reference profile
+#' @keywords internal
 #'
 .lists2tibbles <- function(parent_list, child_list_names) {
   for (child_list in child_list_names) {
@@ -245,6 +253,7 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
 #' @param multiple_ok Can ref_id be a vector of multiple IDs?
 #' @param arg Used to get the actual name of the argument in the calling function. See `?rlang::`topic-error-call``
 #' @param call The caller environment, for more helpful error messages. See `?rlang::`topic-error-call``
+#' @keywords internal
 #'
 .validate_ref_id <- function(ref_id, multiple_ok = FALSE,
                  arg = rlang::caller_arg(ref_id),
@@ -307,6 +316,7 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
 #' @param bool Value to check
 #' @param arg Used to get the actual name of the argument in the calling function. See `?rlang::`topic-error-call``
 #' @param call The caller environment, for more helpful error messages. See `?rlang::`topic-error-call``
+#' @keywords internal
 #'
 .validate_truefalse <- function(bool,
                              arg = rlang::caller_arg(bool),

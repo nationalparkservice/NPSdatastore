@@ -17,3 +17,4 @@ The tidied reference profile
 \description{
 Use for elements like keywords and subjects that are returned as lists of single-element lists
 }
+\keyword{internal}
