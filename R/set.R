@@ -533,6 +533,9 @@ set_by_for_nps <- function(reference_id, by_for_nps, dev = TRUE, interactive = T
   .validate_truefalse(by_for_nps)
   .validate_ref_id(reference_id)
 
+  # Validate that reference is in draft mode, otherwise can't alter bibliography
+  .validate_lifecycle(ref_id = reference_id, expected_lifecycle = "Draft", is_dev = dev)
+
   # Set values
   nps_internal <- TRUE
   by_for_nps <- dplyr::case_when(by_for_nps ~ 'true',
@@ -546,16 +549,12 @@ set_by_for_nps <- function(reference_id, by_for_nps, dev = TRUE, interactive = T
                              is_dev = dev)
   }
 
-  # Check current lifecycle status so we can validate
-  orig_lifecycle <- get_lifecycle_info(reference_id = reference_id, dev = dev)
-  orig_lifecycle <- orig_lifecycle$lifecycle
-
   body <- list(isAgencyOriginated = by_for_nps)
 
   bib <- .datastore_request(is_secure = TRUE, is_dev = dev) |>
     httr2::req_url_path_append("Reference", reference_id, "Bibliography") |>
     httr2::req_body_json(body) |>
-    httr2::req_method("PATCH") |>
+    httr2::req_method("PATCH") |>  # PATCH ensures that only the specified field (isAgencyOriginated) gets modified, not the whole bibliography
     httr2::req_perform()
 
   .validate_resp(bib)
@@ -651,9 +650,12 @@ set_license <- function(reference_id, license_type_id, dev = TRUE, interactive =
 
 #' Activate a reference
 #'
+#' Use with caution! It's usually a better idea to review the reference on the DataStore website and manually activate it.
+#'
 #' @inheritParams upload_file_to_reference
 #'
 #' @returns Invisibly returns the current lifecycle information for the reference
+#'
 #' @export
 #'
 #' @examples
@@ -679,10 +681,11 @@ set_lifecycle_active <- function(reference_id, dev = TRUE, interactive = TRUE) {
 
 #' Set a reference to draft mode
 #'
+#' Use with extreme caution! You may not be able to reactivate via the API if you are working with an older reference that is missing multiple required fields.
+#'
 #' @inheritParams upload_file_to_reference
 #'
 #' @returns Invisibly returns the current lifecycle information for the reference
-#' @export
 #'
 #' @examples
 #' \dontrun{

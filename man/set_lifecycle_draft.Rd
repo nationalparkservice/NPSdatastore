@@ -17,7 +17,7 @@ set_lifecycle_draft(reference_id, dev = TRUE, interactive = TRUE)
 Invisibly returns the current lifecycle information for the reference
 }
 \description{
-Set a reference to draft mode
+Use with extreme caution! You may not be able to reactivate via the API if you are working with an older reference that is missing multiple required fields.
 }
 \examples{
 \dontrun{

@@ -17,7 +17,7 @@ set_lifecycle_active(reference_id, dev = TRUE, interactive = TRUE)
 Invisibly returns the current lifecycle information for the reference
 }
 \description{
-Activate a reference
+Use with caution! It's usually a better idea to review the reference on the DataStore website and manually activate it.
 }
 \examples{
 \dontrun{

@@ -271,6 +271,22 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
 
 }
 
+.validate_lifecycle <- function(ref_id, expected_lifecycle = c("Draft", "Active"), is_dev,
+                                call = rlang::caller_env()) {
+
+  expected_lifecycle <- match.arg(expected_lifecycle, several.ok = FALSE)
+
+  # Get actual lifecycle
+  actual_lifecycle <- get_lifecycle_info(reference_id = ref_id, dev = is_dev)
+  actual_lifecycle <- actual_lifecycle$lifecycle
+
+  # Enforce is file, not folder
+  if (actual_lifecycle != expected_lifecycle) {
+    cli::cli_abort("Lifecycle for reference {ref_id} must be set to {expected_lifecycle}. It is currently set to {actual_lifecycle}.",
+                   call = call)
+  }
+}
+
 .validate_file_path <- function(file_path,
                                 arg = rlang::caller_arg(file_path),
                                 call = rlang::caller_env()) {
