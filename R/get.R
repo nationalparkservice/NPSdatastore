@@ -355,3 +355,53 @@ get_bibliography <- function(reference_id, nps_internal = FALSE, dev = FALSE) {
 
   return(bib)
 }
+
+#' Determine if a reference was created by/for the NPS
+#'
+#' @inheritParams get_bibliography
+#'
+#' @returns TRUE if the reference was created by or for the NPS, FALSE if not.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   by_for_nps <- get_by_for_nps(reference_id = 652358)
+#' }
+#'
+get_by_for_nps <- function(reference_id, nps_internal = FALSE, dev = FALSE) {
+  bib <- get_bibliography(reference_id, nps_internal, dev)
+  by_for_nps <- bib$isAgencyOriginated
+
+  return(by_for_nps)
+}
+
+#' Retrieve the current lifecycle status of a reference.
+#' Only works for internal NPS users.
+#'
+#' @inheritParams get_bibliography
+#'
+#' @returns A list of lifecycle information for the reference
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   lifecycle_info <- get_lifecycle_info(reference_id = 652358)
+#'   lifecycle = lifecycle_info$lifecycle
+#' }
+#'
+get_lifecycle_info <- function(reference_id, dev = FALSE) {
+  .validate_ref_id(reference_id)
+
+  nps_internal <- TRUE
+
+  lifecycle_info <- .datastore_request(is_secure = nps_internal, is_dev = dev) |>
+    httr2::req_url_path_append("Reference", reference_id, "LifecycleConstraints") |>
+    httr2::req_method("GET") |>
+    httr2::req_perform()
+
+  .validate_resp(lifecycle_info)
+
+  lifecycle_info <- httr2::resp_body_json(lifecycle_info)
+
+  return(lifecycle_info)
+}

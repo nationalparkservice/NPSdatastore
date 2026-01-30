@@ -18,3 +18,4 @@ The tidied reference profile
 Use for reference profile elements like taxa and units that are returned as
 lists but would be more appropriately stored as tibbles
 }
+\keyword{internal}

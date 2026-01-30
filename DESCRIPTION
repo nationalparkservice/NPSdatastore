@@ -7,7 +7,7 @@ Description: Interact with the National Park Service (NPS) DataStore in R. NPS D
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Suggests: 
     httptest2,
     knitr,

@@ -2,3 +2,42 @@ url: https://nationalparkservice.github.io/NPSdatastore/
 template:
   bootstrap: 5
 
+reference:
+- title: Retrieve Data & Metadata
+- subtitle: Publicly accessible
+  desc: >
+    Functions for retrieving files and metadata from DataStore. If you are not
+    an internal NPS user, you can still use these functions to access publicly
+    available information on DataStore. NPS users can set `nps_internal = TRUE`
+    to access restricted references as well.
+  contents:
+  - starts_with("search_")
+  - starts_with("get_")
+  - -get_lifecycle_info
+- subtitle: Internal only
+  contents:
+  - get_lifecycle_info
+- title: Create and Modify References
+- subtitle: Internal only
+  desc: >
+    Functions for creating and modifying references in DataStore. These functions
+    only work for internal NPS users. Note that by default, these functions will
+    use the development and testing version of DataStore to avoid accidental
+    changes to real references. Always test your code before switching to
+    `dev = FALSE`! When in doubt, contact the DataStore team (NRSS_datastore@nps.gov)
+    for help.
+  contents:
+  - starts_with("create_")
+  - starts_with("upload")
+  - starts_with("add_")
+  - starts_with("set_")
+  - starts_with("delete_")
+- title: Examples
+  contents:
+  - starts_with("example_")
+  - public_refs
+  - internal_refs
+- title: Miscellaneous
+- subtitle: Internal only
+  contents:
+  - active_directory_lookup

@@ -5,25 +5,25 @@
 
 # datastore API base URL:
 assign("ds_public_api",
-       "https://irmaservices.nps.gov/datastore/v7/rest",
+       "https://irmaservices.nps.gov/datastore/v8/rest",
        envir = .pkgglobalenv
 )
 
 # datastore secure API base URL:
 assign("ds_secure_api",
-       "https://irmaservices.nps.gov/datastore-secure/v7/rest",
+       "https://irmaservices.nps.gov/datastore-secure/v8/rest",
        envir = .pkgglobalenv
 )
 
 # datastore secure dev api
 assign("ds_dev_secure_api",
-       "https://irmadevservices.nps.gov/datastore-secure/v7/rest",
+       "https://irmadevservices.nps.gov/datastore-secure/v8/rest",
        envir = .pkgglobalenv
 )
 
 # datastore dev API
 assign("ds_dev_public_api",
-       "https://irmadevservices.nps.gov/datastore/v7/rest",
+       "https://irmadevservices.nps.gov/datastore/v8/rest",
        envir = .pkgglobalenv
 )
 
@@ -62,7 +62,9 @@ globalVariables(c("public_refs",
                   "mimeType",
                   "downloadLink",
                   "is508Compliant",
-                  "fileSize_kb"))
+                  "fileSize_kb",
+                  "extensionAttribute2",
+                  "orcid"))
 
 
 #' Get the right base URL for the DataStore API
@@ -71,6 +73,7 @@ globalVariables(c("public_refs",
 #' @param is_dev Retrieve the dev version of the API base URL?
 #'
 #' @returns One of four base URLs for the DataStore API (public, secure, public+dev, secure+dev)
+#' @keywords internal
 #'
 .get_base_url <- function(is_secure, is_dev) {
   datastore_url <- dplyr::case_when(
@@ -89,6 +92,7 @@ globalVariables(c("public_refs",
 #' @inheritParams .get_base_url
 #'
 #' @returns The url to the reference profile page
+#' @keywords internal
 #'
 .get_ref_profile_url <- function(ref_id, is_dev) {
   ref_profile_url <- dplyr::case_when(
@@ -106,6 +110,7 @@ globalVariables(c("public_refs",
 #' @param suppress_errors Suppress HTTP errors? Set to TRUE if using `.validate_resp()`
 #'
 #' @returns A httr2 request object with curl options set to allow authentication for NPS users (if using secure API)
+#' @keywords internal
 #'
 .datastore_request <- function(is_secure, is_dev, suppress_errors = TRUE) {
   base_url <- .get_base_url(is_secure = is_secure, is_dev = is_dev)
@@ -132,6 +137,7 @@ globalVariables(c("public_refs",
 #' @inheritParams .get_base_url
 #'
 #' @returns List of reference profiles
+#' @keywords internal
 #'
 .get_reference_profiles <- function(reference_ids, is_secure, is_dev) {
   request <- .datastore_request(is_secure = is_secure, is_dev = is_dev) |>
@@ -169,6 +175,7 @@ globalVariables(c("public_refs",
 #' @param child_list_names The elements of the reference profile that should be converted to vectors
 #'
 #' @returns The tidied reference profile
+#' @keywords internal
 #'
 .lists2vectors <- function(parent_list, child_list_names) {
   for (child_list in child_list_names) {
@@ -188,6 +195,7 @@ globalVariables(c("public_refs",
 #' @param child_list_names The elements of the reference profile that should be converted to tibbles
 #'
 #' @returns The tidied reference profile
+#' @keywords internal
 #'
 .lists2tibbles <- function(parent_list, child_list_names) {
   for (child_list in child_list_names) {
@@ -245,6 +253,7 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
 #' @param multiple_ok Can ref_id be a vector of multiple IDs?
 #' @param arg Used to get the actual name of the argument in the calling function. See `?rlang::`topic-error-call``
 #' @param call The caller environment, for more helpful error messages. See `?rlang::`topic-error-call``
+#' @keywords internal
 #'
 .validate_ref_id <- function(ref_id, multiple_ok = FALSE,
                  arg = rlang::caller_arg(ref_id),
@@ -271,6 +280,22 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
 
 }
 
+.validate_lifecycle <- function(ref_id, expected_lifecycle = c("Draft", "Active"), is_dev,
+                                call = rlang::caller_env()) {
+
+  expected_lifecycle <- match.arg(expected_lifecycle, several.ok = FALSE)
+
+  # Get actual lifecycle
+  actual_lifecycle <- get_lifecycle_info(reference_id = ref_id, dev = is_dev)
+  actual_lifecycle <- actual_lifecycle$lifecycle
+
+  # Enforce is file, not folder
+  if (actual_lifecycle != expected_lifecycle) {
+    cli::cli_abort("Lifecycle for reference {ref_id} must be set to {expected_lifecycle}. It is currently set to {actual_lifecycle}.",
+                   call = call)
+  }
+}
+
 .validate_file_path <- function(file_path,
                                 arg = rlang::caller_arg(file_path),
                                 call = rlang::caller_env()) {
@@ -284,6 +309,25 @@ example_ref_ids <- function(visibility = c("public", "internal", "both"), n, see
     cli::cli_abort("{.arg {arg}} must include a filename (e.g. \"data.csv\"). It looks like you provided the path to a folder instead.",
                    call = call)
   }
+}
+
+#' Validate TRUE/FALSE arguments
+#'
+#' @param bool Value to check
+#' @param arg Used to get the actual name of the argument in the calling function. See `?rlang::`topic-error-call``
+#' @param call The caller environment, for more helpful error messages. See `?rlang::`topic-error-call``
+#' @keywords internal
+#'
+.validate_truefalse <- function(bool,
+                             arg = rlang::caller_arg(bool),
+                             call = rlang::caller_env()) {
+
+  # Enforce a TRUE/FALSE value
+  if (!is.logical(bool) || is.na(bool)) {
+    cli::cli_abort("{.arg {arg}} is invalid. Must be logical (`TRUE` or `FALSE`).",
+                   call = call)
+  }
+
 }
 
 .validate_retry <- function(retry,

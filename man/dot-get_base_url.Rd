@@ -17,3 +17,4 @@ One of four base URLs for the DataStore API (public, secure, public+dev, secure+
 \description{
 Get the right base URL for the DataStore API
 }
+\keyword{internal}

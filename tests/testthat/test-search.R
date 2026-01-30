@@ -6,7 +6,7 @@ ref_profile_names <- c("referenceId", "referenceType", "citation", "visibility",
                        "products", "projects", "crossReferences", "units",
                        "boundingBoxes", "taxa", "subjects", "keywords",
                        "permissions", "history", "versions",
-                       "contentProducerUnits")
+                       "contentProducerUnits", "programs")
 
 with_mock_dir("reference_profiles_2", {
   test_that("search by reference IDs works", {

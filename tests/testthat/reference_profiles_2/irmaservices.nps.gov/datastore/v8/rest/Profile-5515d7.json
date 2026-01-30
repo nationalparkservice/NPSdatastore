@@ -51,6 +51,7 @@
             "notes": null,
             "purpose": null,
             "tableOfContents": null,
+            "isAgencyOriginated": true,
             "metadataStandard": null,
             "licenseType": null
         },
@@ -109,68 +110,16 @@
                     "siblingProducts": {
                         "reference": [
                             {
-                                "code": 2267853,
-                                "dateOfIssue": "2019-04-01T00:00:00",
-                                "displayCitation": "Stephens JL and Others. 2019. Established and empirically derived landbird focal species lists correlate with vegetation and avian metrics. Ecological Applications. 29(3)",
+                                "code": 2294171,
+                                "dateOfIssue": "2022-08-01T00:00:00",
+                                "displayCitation": "Stephens JL and Others. 2022. Landbird monitoring: 2021 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks. Natural Resource Data Series. NPS/KLMN/NRDS—2022/1364. National Park Service. Fort Collins, Colorado.   https://doi.org/10.36967/2294171",
                                 "downloadability": "Public",
-                                "fileCount": 2,
-                                "id": 2267853,
+                                "fileCount": 1,
+                                "id": 2294171,
                                 "lifecycle": "Active",
-                                "title": "Established and empirically derived landbird focal species lists correlate with vegetation and avian metrics",
-                                "type": "JournalArticle",
-                                "typeName": "Journal Article",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2302236,
-                                "dateOfIssue": "2024-01-24T00:00:00",
-                                "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Bird Banding Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302236",
-                                "downloadability": "Public",
-                                "fileCount": 11,
-                                "id": 2302236,
-                                "lifecycle": "Active",
-                                "title": "Klamath Bird Banding Data Package",
-                                "type": "Datapackage",
-                                "typeName": "Data Package",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2302713,
-                                "dateOfIssue": "2024-03-05T00:00:00",
-                                "displayCitation": "Klamath Inventory and Monitoring Network. 2024. Klamath Landbird Point Count Monitoring Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302713",
-                                "downloadability": "Public",
-                                "fileCount": 9,
-                                "id": 2302713,
-                                "lifecycle": "Active",
-                                "title": "Klamath Landbird Point Count Monitoring Data Package",
-                                "type": "Datapackage",
-                                "typeName": "Data Package",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2303438,
-                                "dateOfIssue": "2024-04-24T00:00:00",
-                                "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Landbird Point Count Monitoring Data Package- Protected. National Park Service. Fort Collins CO",
-                                "downloadability": "Internal",
-                                "fileCount": 9,
-                                "id": 2303438,
-                                "lifecycle": "Active",
-                                "title": "Klamath Landbird Point Count Monitoring Data Package- Protected",
-                                "type": "Datapackage",
-                                "typeName": "Data Package",
-                                "visibility": "Internal"
-                            },
-                            {
-                                "code": 2303173,
-                                "dateOfIssue": "2024-04-04T00:00:00",
-                                "displayCitation": "Klamath Bird Observatory and Klamath Inventory and Monitoring Network. 2024. Klamath Network Landbird Banding Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2303173",
-                                "downloadability": "Public",
-                                "fileCount": 11,
-                                "id": 2303173,
-                                "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Banding Data Package",
-                                "type": "Datapackage",
-                                "typeName": "Data Package",
+                                "title": "Landbird monitoring: 2021 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks",
+                                "type": "PublishedReport",
+                                "typeName": "Published Report",
                                 "visibility": "Public"
                             },
                             {
@@ -200,6 +149,32 @@
                                 "visibility": "Internal"
                             },
                             {
+                                "code": 2302236,
+                                "dateOfIssue": "2024-01-24T00:00:00",
+                                "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Bird Banding Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302236",
+                                "downloadability": "Public",
+                                "fileCount": 11,
+                                "id": 2302236,
+                                "lifecycle": "Active",
+                                "title": "Klamath Bird Banding Data Package",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2302713,
+                                "dateOfIssue": "2024-03-05T00:00:00",
+                                "displayCitation": "Klamath Inventory and Monitoring Network. 2024. Klamath Landbird Point Count Monitoring Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302713",
+                                "downloadability": "Public",
+                                "fileCount": 9,
+                                "id": 2302713,
+                                "lifecycle": "Active",
+                                "title": "Klamath Landbird Point Count Monitoring Data Package",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
+                                "visibility": "Public"
+                            },
+                            {
                                 "code": 2302748,
                                 "dateOfIssue": "2024-03-07T00:00:00",
                                 "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Network Landbird Point Count Monitoring Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302748",
@@ -208,6 +183,19 @@
                                 "id": 2302748,
                                 "lifecycle": "Active",
                                 "title": "Klamath Network Landbird Point Count Monitoring Data Package",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2303173,
+                                "dateOfIssue": "2024-04-04T00:00:00",
+                                "displayCitation": "Klamath Bird Observatory and Klamath Inventory and Monitoring Network. 2024. Klamath Network Landbird Banding Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2303173",
+                                "downloadability": "Public",
+                                "fileCount": 11,
+                                "id": 2303173,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Banding Data Package",
                                 "type": "Datapackage",
                                 "typeName": "Data Package",
                                 "visibility": "Public"
@@ -223,6 +211,45 @@
                                 "title": "Klamath Network Landbird Point Count Monitoring Data Package",
                                 "type": "Datapackage",
                                 "typeName": "Data Package",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2303313,
+                                "dateOfIssue": "2024-05-01T00:00:00",
+                                "displayCitation": "Stephens JL and Others. 2024. Landbird monitoring: 2022 results from Crater Lake National Park, Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area. Science Report. NPS/SR—2024/111. National Park Service. Fort Collins, Colorado.   https://doi.org/10.36967/2303313",
+                                "downloadability": "Public",
+                                "fileCount": 1,
+                                "id": 2303313,
+                                "lifecycle": "Active",
+                                "title": "Landbird monitoring: 2022 results from Crater Lake National Park, Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area",
+                                "type": "PublishedReport",
+                                "typeName": "Published Report",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2303438,
+                                "dateOfIssue": "2024-04-24T00:00:00",
+                                "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Landbird Point Count Monitoring Data Package- Protected. National Park Service. Fort Collins CO",
+                                "downloadability": "Internal",
+                                "fileCount": 9,
+                                "id": 2303438,
+                                "lifecycle": "Active",
+                                "title": "Klamath Landbird Point Count Monitoring Data Package- Protected",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
+                                "visibility": "Internal"
+                            },
+                            {
+                                "code": 2267853,
+                                "dateOfIssue": "2019-04-01T00:00:00",
+                                "displayCitation": "Stephens JL and Others. 2019. Established and empirically derived landbird focal species lists correlate with vegetation and avian metrics. Ecological Applications. 29(3)",
+                                "downloadability": "Public",
+                                "fileCount": 2,
+                                "id": 2267853,
+                                "lifecycle": "Active",
+                                "title": "Established and empirically derived landbird focal species lists correlate with vegetation and avian metrics",
+                                "type": "JournalArticle",
+                                "typeName": "Journal Article",
                                 "visibility": "Public"
                             },
                             {
@@ -247,32 +274,6 @@
                                 "id": 2284287,
                                 "lifecycle": "Active",
                                 "title": "Landbird monitoring: 2019 results from Crater Lake National Park and Oregon Caves National Monument and Preserve",
-                                "type": "PublishedReport",
-                                "typeName": "Published Report",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2294171,
-                                "dateOfIssue": "2022-08-01T00:00:00",
-                                "displayCitation": "Stephens JL and Others. 2022. Landbird monitoring: 2021 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks. Natural Resource Data Series. NPS/KLMN/NRDS—2022/1364. National Park Service. Fort Collins, Colorado.   https://doi.org/10.36967/2294171",
-                                "downloadability": "Public",
-                                "fileCount": 1,
-                                "id": 2294171,
-                                "lifecycle": "Active",
-                                "title": "Landbird monitoring: 2021 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks",
-                                "type": "PublishedReport",
-                                "typeName": "Published Report",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2303313,
-                                "dateOfIssue": "2024-05-01T00:00:00",
-                                "displayCitation": "Stephens JL and Others. 2024. Landbird monitoring: 2022 results from Crater Lake National Park, Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area. Science Report. NPS/SR—2024/111. National Park Service. Fort Collins, Colorado.   https://doi.org/10.36967/2303313",
-                                "downloadability": "Public",
-                                "fileCount": 1,
-                                "id": 2303313,
-                                "lifecycle": "Active",
-                                "title": "Landbird monitoring: 2022 results from Crater Lake National Park, Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area",
                                 "type": "PublishedReport",
                                 "typeName": "Published Report",
                                 "visibility": "Public"
@@ -332,7 +333,7 @@
                             {
                                 "code": 2184433,
                                 "dateOfIssue": "2012-04-04T00:00:00",
-                                "displayCitation": "Mohren S. 2012. Klamath Network Landbird Monitoring GIS Data",
+                                "displayCitation": "Mohren S. 2012. Klamath Network Landbird Monitoring GIS Data. National Park Service",
                                 "downloadability": "Public",
                                 "fileCount": 1,
                                 "id": 2184433,
@@ -341,32 +342,6 @@
                                 "type": "GeospatialDataset",
                                 "typeName": "Geospatial Dataset",
                                 "visibility": "Public"
-                            },
-                            {
-                                "code": 2184434,
-                                "dateOfIssue": "2008-04-04T00:00:00",
-                                "displayCitation": "Mohren S. 2008. Klamath Network Landbird Monitoring Project 2008 Deliverables",
-                                "downloadability": "Restricted",
-                                "fileCount": 1,
-                                "id": 2184434,
-                                "lifecycle": "Draft",
-                                "title": "Klamath Network Landbird Monitoring Project 2008 Deliverables",
-                                "type": "GenericDataset",
-                                "typeName": "Generic Dataset",
-                                "visibility": "Restricted"
-                            },
-                            {
-                                "code": 2184436,
-                                "dateOfIssue": "2010-04-04T00:00:00",
-                                "displayCitation": "Mohren S. 2010. Klamath Network Landbird Monitoring Project 2010 Deliverables",
-                                "downloadability": "Restricted",
-                                "fileCount": 1,
-                                "id": 2184436,
-                                "lifecycle": "Draft",
-                                "title": "Klamath Network Landbird Monitoring Project 2010 Deliverables",
-                                "type": "GenericDataset",
-                                "typeName": "Generic Dataset",
-                                "visibility": "Restricted"
                             },
                             {
                                 "code": 2184912,
@@ -434,17 +409,17 @@
                                 "visibility": "Public"
                             },
                             {
-                                "code": 2219340,
-                                "dateOfIssue": "2009-04-04T00:00:00",
-                                "displayCitation": "Mohren S. 2009. Klamath Network Landbird Monitoring Project 2009 Deliverables",
-                                "downloadability": "Restricted",
+                                "code": 2231868,
+                                "dateOfIssue": "2016-08-01T00:00:00",
+                                "displayCitation": "Stephens JL. 2016. Landbird monitoring: 2015 results from Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area. Natural Resource Data Series. NPS/KLMN/NRDS—2016/1043. National Park Service. Fort Collins, Colorado",
+                                "downloadability": "Public",
                                 "fileCount": 1,
-                                "id": 2219340,
-                                "lifecycle": "Draft",
-                                "title": "Klamath Network Landbird Monitoring Project 2009 Deliverables",
-                                "type": "GenericDataset",
-                                "typeName": "Generic Dataset",
-                                "visibility": "Restricted"
+                                "id": 2231868,
+                                "lifecycle": "Active",
+                                "title": "Landbird monitoring: 2015 results from Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area",
+                                "type": "PublishedReport",
+                                "typeName": "Published Report",
+                                "visibility": "Public"
                             },
                             {
                                 "code": 2235316,
@@ -460,68 +435,16 @@
                                 "visibility": "Public"
                             },
                             {
-                                "code": 2268200,
-                                "dateOfIssue": "2019-12-01T00:00:00",
-                                "displayCitation": "2019. Klamath Network Landbird Monitoring Project 2019 Database",
-                                "downloadability": "Internal",
+                                "code": 2243022,
+                                "dateOfIssue": "2017-08-01T00:00:00",
+                                "displayCitation": "Stephens JL. 2017. Landbird monitoring: 2016 results from Crater Lake National Park and Oregon Caves National Monument and Preserve. Natural Resource Data Series. NPS/KLMN/NRDS—2017/1113. National Park Service. Fort Collins, Colorado",
+                                "downloadability": "Public",
                                 "fileCount": 1,
-                                "id": 2268200,
+                                "id": 2243022,
                                 "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Monitoring Project 2019 Database",
-                                "type": "TabularDataset",
-                                "typeName": "Tabular Dataset",
-                                "visibility": "Internal"
-                            },
-                            {
-                                "code": 2289823,
-                                "dateOfIssue": "2021-12-17T00:00:00",
-                                "displayCitation": "Klamath Bird Observatory. 2021. Klamath Network Landbird Monitoring Project 2021 Data",
-                                "downloadability": "Internal",
-                                "fileCount": 1,
-                                "id": 2289823,
-                                "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Monitoring Project 2021 Data",
-                                "type": "TabularDataset",
-                                "typeName": "Tabular Dataset",
-                                "visibility": "Internal"
-                            },
-                            {
-                                "code": 2278339,
-                                "dateOfIssue": "2020-08-01T00:00:00",
-                                "displayCitation": "2020. Klamath Network Landbird Monitoring Project Master Databases",
-                                "downloadability": "Public",
-                                "fileCount": 2,
-                                "id": 2278339,
-                                "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Monitoring Project Master Databases",
-                                "type": "TabularDataset",
-                                "typeName": "Tabular Dataset",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2256621,
-                                "dateOfIssue": "2018-10-01T00:00:00",
-                                "displayCitation": "2018. Klamath Network Landbird Monitoring Project Master Databases",
-                                "downloadability": "Public",
-                                "fileCount": 2,
-                                "id": 2256621,
-                                "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Monitoring Project Master Databases",
-                                "type": "TabularDataset",
-                                "typeName": "Tabular Dataset",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2266775,
-                                "dateOfIssue": "2019-09-30T00:00:00",
-                                "displayCitation": "2019. Klamath Network Landbird Monitoring Project Master Databases",
-                                "downloadability": "Public",
-                                "fileCount": 2,
-                                "id": 2266775,
-                                "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Monitoring Project Master Databases",
-                                "type": "TabularDataset",
-                                "typeName": "Tabular Dataset",
+                                "title": "Landbird monitoring: 2016 results from Crater Lake National Park and Oregon Caves National Monument and Preserve",
+                                "type": "PublishedReport",
+                                "typeName": "Published Report",
                                 "visibility": "Public"
                             },
                             {
@@ -564,6 +487,45 @@
                                 "visibility": "Public"
                             },
                             {
+                                "code": 2254708,
+                                "dateOfIssue": "2018-08-01T00:00:00",
+                                "displayCitation": "Stephens JL and Armstrong EE. 2018. Landbird monitoring: 2017 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks. Natural Resource Data Series. NPS/KLMN/NRDS—2018/1180. National Park Service. Fort Collins, Colorado",
+                                "downloadability": "Public",
+                                "fileCount": 2,
+                                "id": 2254708,
+                                "lifecycle": "Active",
+                                "title": "Landbird monitoring: 2017 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks",
+                                "type": "PublishedReport",
+                                "typeName": "Published Report",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2256621,
+                                "dateOfIssue": "2018-10-01T00:00:00",
+                                "displayCitation": "2018. Klamath Network Landbird Monitoring Project Master Databases",
+                                "downloadability": "Public",
+                                "fileCount": 2,
+                                "id": 2256621,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Monitoring Project Master Databases",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2266775,
+                                "dateOfIssue": "2019-09-30T00:00:00",
+                                "displayCitation": "2019. Klamath Network Landbird Monitoring Project Master Databases",
+                                "downloadability": "Public",
+                                "fileCount": 2,
+                                "id": 2266775,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Monitoring Project Master Databases",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
+                                "visibility": "Public"
+                            },
+                            {
                                 "code": 664359,
                                 "dateOfIssue": "2010-03-01T00:00:00",
                                 "displayCitation": "Stephens JL and Others. 2010. Klamath Network Landbird Monitoring Protocol. Natural Resource Report. NPS/KLMN/NRR—2010/187. National Park Service. Fort Collins, Colorado",
@@ -577,42 +539,68 @@
                                 "visibility": "Public"
                             },
                             {
-                                "code": 2231868,
-                                "dateOfIssue": "2016-08-01T00:00:00",
-                                "displayCitation": "Stephens JL. 2016. Landbird monitoring: 2015 results from Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area. Natural Resource Data Series. NPS/KLMN/NRDS—2016/1043. National Park Service. Fort Collins, Colorado",
-                                "downloadability": "Public",
+                                "code": 2268200,
+                                "dateOfIssue": "2019-12-01T00:00:00",
+                                "displayCitation": "2019. Klamath Network Landbird Monitoring Project 2019 Database",
+                                "downloadability": "Internal",
                                 "fileCount": 1,
-                                "id": 2231868,
+                                "id": 2268200,
                                 "lifecycle": "Active",
-                                "title": "Landbird monitoring: 2015 results from Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area",
-                                "type": "PublishedReport",
-                                "typeName": "Published Report",
-                                "visibility": "Public"
+                                "title": "Klamath Network Landbird Monitoring Project 2019 Database",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
+                                "visibility": "Internal"
                             },
                             {
-                                "code": 2243022,
-                                "dateOfIssue": "2017-08-01T00:00:00",
-                                "displayCitation": "Stephens JL. 2017. Landbird monitoring: 2016 results from Crater Lake National Park and Oregon Caves National Monument and Preserve. Natural Resource Data Series. NPS/KLMN/NRDS—2017/1113. National Park Service. Fort Collins, Colorado",
-                                "downloadability": "Public",
-                                "fileCount": 1,
-                                "id": 2243022,
-                                "lifecycle": "Active",
-                                "title": "Landbird monitoring: 2016 results from Crater Lake National Park and Oregon Caves National Monument and Preserve",
-                                "type": "PublishedReport",
-                                "typeName": "Published Report",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2254708,
-                                "dateOfIssue": "2018-08-01T00:00:00",
-                                "displayCitation": "Stephens JL and Armstrong EE. 2018. Landbird monitoring: 2017 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks. Natural Resource Data Series. NPS/KLMN/NRDS—2018/1180. National Park Service. Fort Collins, Colorado",
+                                "code": 2278339,
+                                "dateOfIssue": "2020-08-01T00:00:00",
+                                "displayCitation": "2020. Klamath Network Landbird Monitoring Project Master Databases",
                                 "downloadability": "Public",
                                 "fileCount": 2,
-                                "id": 2254708,
+                                "id": 2278339,
                                 "lifecycle": "Active",
-                                "title": "Landbird monitoring: 2017 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks",
-                                "type": "PublishedReport",
-                                "typeName": "Published Report",
+                                "title": "Klamath Network Landbird Monitoring Project Master Databases",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2289823,
+                                "dateOfIssue": "2021-12-17T00:00:00",
+                                "displayCitation": "Klamath Bird Observatory. 2021. Klamath Network Landbird Monitoring Project 2021 Data",
+                                "downloadability": "Internal",
+                                "fileCount": 1,
+                                "id": 2289823,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Monitoring Project 2021 Data",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
+                                "visibility": "Internal"
+                            },
+                            {
+                                "code": 2311430,
+                                "dateOfIssue": "2025-05-08T00:00:00",
+                                "displayCitation": "Klamath Bird Observatory. 2025. Klamath Network Landbird Point Count Monitoring Data 2024. National Park Service. Fort Collins, CO",
+                                "downloadability": "Public",
+                                "fileCount": 7,
+                                "id": 2311430,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Point Count Monitoring Data 2024",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2313162,
+                                "dateOfIssue": "2025-05-20T00:00:00",
+                                "displayCitation": "Klamath Bird Observatory and Klamath Inventory and Monitoring Network. 2025. Klamath Network Landbird Banding Data Package 2008-2024. National Park Service. Fort Collins CO  https://doi.org/10.57830/2313162",
+                                "downloadability": "Public",
+                                "fileCount": 11,
+                                "id": 2313162,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Banding Data Package 2008-2024",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
                                 "visibility": "Public"
                             }
                         ]
@@ -2393,14 +2381,14 @@
             "Vital Signs"
         ],
         "permissions": {
-            "sensitivity": null,
-            "sensitivityDetail": null,
-            "copyright": null,
-            "quality": null,
-            "useConstraints": null,
-            "fileAccess": "Public",
             "referenceOwners": "Fagan Johnson (Fagan_Johnson@nps.gov); Lise Grace (Lise_Grace@nps.gov); Margaret Beer (margaret_beer@nps.gov*)",
-            "usersWithFileAccess": null
+            "fileAccess": "Public",
+            "additionalConstraints": null,
+            "usersWithFileAccess": null,
+            "legalAuthority": null,
+            "otherAuthority": null,
+            "justification": null,
+            "contactEmail": null
         },
         "history": {
             "createdBy": "amateljak@nps.gov",
@@ -2410,7 +2398,8 @@
             "isLegacy": false
         },
         "versions": null,
-        "contentProducerUnits": null
+        "contentProducerUnits": null,
+        "programs": null
     },
     {
         "referenceId": 2254708,
@@ -2489,6 +2478,7 @@
             "notes": null,
             "purpose": null,
             "tableOfContents": null,
+            "isAgencyOriginated": true,
             "metadataStandard": null,
             "licenseType": null
         },
@@ -2554,68 +2544,16 @@
                     "siblingProducts": {
                         "reference": [
                             {
-                                "code": 2267853,
-                                "dateOfIssue": "2019-04-01T00:00:00",
-                                "displayCitation": "Stephens JL and Others. 2019. Established and empirically derived landbird focal species lists correlate with vegetation and avian metrics. Ecological Applications. 29(3)",
+                                "code": 2294171,
+                                "dateOfIssue": "2022-08-01T00:00:00",
+                                "displayCitation": "Stephens JL and Others. 2022. Landbird monitoring: 2021 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks. Natural Resource Data Series. NPS/KLMN/NRDS—2022/1364. National Park Service. Fort Collins, Colorado.   https://doi.org/10.36967/2294171",
                                 "downloadability": "Public",
-                                "fileCount": 2,
-                                "id": 2267853,
+                                "fileCount": 1,
+                                "id": 2294171,
                                 "lifecycle": "Active",
-                                "title": "Established and empirically derived landbird focal species lists correlate with vegetation and avian metrics",
-                                "type": "JournalArticle",
-                                "typeName": "Journal Article",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2302236,
-                                "dateOfIssue": "2024-01-24T00:00:00",
-                                "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Bird Banding Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302236",
-                                "downloadability": "Public",
-                                "fileCount": 11,
-                                "id": 2302236,
-                                "lifecycle": "Active",
-                                "title": "Klamath Bird Banding Data Package",
-                                "type": "Datapackage",
-                                "typeName": "Data Package",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2302713,
-                                "dateOfIssue": "2024-03-05T00:00:00",
-                                "displayCitation": "Klamath Inventory and Monitoring Network. 2024. Klamath Landbird Point Count Monitoring Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302713",
-                                "downloadability": "Public",
-                                "fileCount": 9,
-                                "id": 2302713,
-                                "lifecycle": "Active",
-                                "title": "Klamath Landbird Point Count Monitoring Data Package",
-                                "type": "Datapackage",
-                                "typeName": "Data Package",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2303438,
-                                "dateOfIssue": "2024-04-24T00:00:00",
-                                "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Landbird Point Count Monitoring Data Package- Protected. National Park Service. Fort Collins CO",
-                                "downloadability": "Internal",
-                                "fileCount": 9,
-                                "id": 2303438,
-                                "lifecycle": "Active",
-                                "title": "Klamath Landbird Point Count Monitoring Data Package- Protected",
-                                "type": "Datapackage",
-                                "typeName": "Data Package",
-                                "visibility": "Internal"
-                            },
-                            {
-                                "code": 2303173,
-                                "dateOfIssue": "2024-04-04T00:00:00",
-                                "displayCitation": "Klamath Bird Observatory and Klamath Inventory and Monitoring Network. 2024. Klamath Network Landbird Banding Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2303173",
-                                "downloadability": "Public",
-                                "fileCount": 11,
-                                "id": 2303173,
-                                "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Banding Data Package",
-                                "type": "Datapackage",
-                                "typeName": "Data Package",
+                                "title": "Landbird monitoring: 2021 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks",
+                                "type": "PublishedReport",
+                                "typeName": "Published Report",
                                 "visibility": "Public"
                             },
                             {
@@ -2645,6 +2583,32 @@
                                 "visibility": "Internal"
                             },
                             {
+                                "code": 2302236,
+                                "dateOfIssue": "2024-01-24T00:00:00",
+                                "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Bird Banding Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302236",
+                                "downloadability": "Public",
+                                "fileCount": 11,
+                                "id": 2302236,
+                                "lifecycle": "Active",
+                                "title": "Klamath Bird Banding Data Package",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2302713,
+                                "dateOfIssue": "2024-03-05T00:00:00",
+                                "displayCitation": "Klamath Inventory and Monitoring Network. 2024. Klamath Landbird Point Count Monitoring Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302713",
+                                "downloadability": "Public",
+                                "fileCount": 9,
+                                "id": 2302713,
+                                "lifecycle": "Active",
+                                "title": "Klamath Landbird Point Count Monitoring Data Package",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
+                                "visibility": "Public"
+                            },
+                            {
                                 "code": 2302748,
                                 "dateOfIssue": "2024-03-07T00:00:00",
                                 "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Network Landbird Point Count Monitoring Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2302748",
@@ -2653,6 +2617,19 @@
                                 "id": 2302748,
                                 "lifecycle": "Active",
                                 "title": "Klamath Network Landbird Point Count Monitoring Data Package",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2303173,
+                                "dateOfIssue": "2024-04-04T00:00:00",
+                                "displayCitation": "Klamath Bird Observatory and Klamath Inventory and Monitoring Network. 2024. Klamath Network Landbird Banding Data Package. National Park Service. Fort Collins CO  https://doi.org/10.57830/2303173",
+                                "downloadability": "Public",
+                                "fileCount": 11,
+                                "id": 2303173,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Banding Data Package",
                                 "type": "Datapackage",
                                 "typeName": "Data Package",
                                 "visibility": "Public"
@@ -2668,6 +2645,45 @@
                                 "title": "Klamath Network Landbird Point Count Monitoring Data Package",
                                 "type": "Datapackage",
                                 "typeName": "Data Package",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2303313,
+                                "dateOfIssue": "2024-05-01T00:00:00",
+                                "displayCitation": "Stephens JL and Others. 2024. Landbird monitoring: 2022 results from Crater Lake National Park, Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area. Science Report. NPS/SR—2024/111. National Park Service. Fort Collins, Colorado.   https://doi.org/10.36967/2303313",
+                                "downloadability": "Public",
+                                "fileCount": 1,
+                                "id": 2303313,
+                                "lifecycle": "Active",
+                                "title": "Landbird monitoring: 2022 results from Crater Lake National Park, Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area",
+                                "type": "PublishedReport",
+                                "typeName": "Published Report",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2303438,
+                                "dateOfIssue": "2024-04-24T00:00:00",
+                                "displayCitation": "Klamath Inventory and Monitoring Network and Klamath Bird Observatory. 2024. Klamath Landbird Point Count Monitoring Data Package- Protected. National Park Service. Fort Collins CO",
+                                "downloadability": "Internal",
+                                "fileCount": 9,
+                                "id": 2303438,
+                                "lifecycle": "Active",
+                                "title": "Klamath Landbird Point Count Monitoring Data Package- Protected",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
+                                "visibility": "Internal"
+                            },
+                            {
+                                "code": 2267853,
+                                "dateOfIssue": "2019-04-01T00:00:00",
+                                "displayCitation": "Stephens JL and Others. 2019. Established and empirically derived landbird focal species lists correlate with vegetation and avian metrics. Ecological Applications. 29(3)",
+                                "downloadability": "Public",
+                                "fileCount": 2,
+                                "id": 2267853,
+                                "lifecycle": "Active",
+                                "title": "Established and empirically derived landbird focal species lists correlate with vegetation and avian metrics",
+                                "type": "JournalArticle",
+                                "typeName": "Journal Article",
                                 "visibility": "Public"
                             },
                             {
@@ -2692,32 +2708,6 @@
                                 "id": 2284287,
                                 "lifecycle": "Active",
                                 "title": "Landbird monitoring: 2019 results from Crater Lake National Park and Oregon Caves National Monument and Preserve",
-                                "type": "PublishedReport",
-                                "typeName": "Published Report",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2294171,
-                                "dateOfIssue": "2022-08-01T00:00:00",
-                                "displayCitation": "Stephens JL and Others. 2022. Landbird monitoring: 2021 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks. Natural Resource Data Series. NPS/KLMN/NRDS—2022/1364. National Park Service. Fort Collins, Colorado.   https://doi.org/10.36967/2294171",
-                                "downloadability": "Public",
-                                "fileCount": 1,
-                                "id": 2294171,
-                                "lifecycle": "Active",
-                                "title": "Landbird monitoring: 2021 results from Oregon Caves National Monument and Preserve, Lava Beds National Monument, and Redwood National and State Parks",
-                                "type": "PublishedReport",
-                                "typeName": "Published Report",
-                                "visibility": "Public"
-                            },
-                            {
-                                "code": 2303313,
-                                "dateOfIssue": "2024-05-01T00:00:00",
-                                "displayCitation": "Stephens JL and Others. 2024. Landbird monitoring: 2022 results from Crater Lake National Park, Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area. Science Report. NPS/SR—2024/111. National Park Service. Fort Collins, Colorado.   https://doi.org/10.36967/2303313",
-                                "downloadability": "Public",
-                                "fileCount": 1,
-                                "id": 2303313,
-                                "lifecycle": "Active",
-                                "title": "Landbird monitoring: 2022 results from Crater Lake National Park, Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area",
                                 "type": "PublishedReport",
                                 "typeName": "Published Report",
                                 "visibility": "Public"
@@ -2777,7 +2767,7 @@
                             {
                                 "code": 2184433,
                                 "dateOfIssue": "2012-04-04T00:00:00",
-                                "displayCitation": "Mohren S. 2012. Klamath Network Landbird Monitoring GIS Data",
+                                "displayCitation": "Mohren S. 2012. Klamath Network Landbird Monitoring GIS Data. National Park Service",
                                 "downloadability": "Public",
                                 "fileCount": 1,
                                 "id": 2184433,
@@ -2786,32 +2776,6 @@
                                 "type": "GeospatialDataset",
                                 "typeName": "Geospatial Dataset",
                                 "visibility": "Public"
-                            },
-                            {
-                                "code": 2184434,
-                                "dateOfIssue": "2008-04-04T00:00:00",
-                                "displayCitation": "Mohren S. 2008. Klamath Network Landbird Monitoring Project 2008 Deliverables",
-                                "downloadability": "Restricted",
-                                "fileCount": 1,
-                                "id": 2184434,
-                                "lifecycle": "Draft",
-                                "title": "Klamath Network Landbird Monitoring Project 2008 Deliverables",
-                                "type": "GenericDataset",
-                                "typeName": "Generic Dataset",
-                                "visibility": "Restricted"
-                            },
-                            {
-                                "code": 2184436,
-                                "dateOfIssue": "2010-04-04T00:00:00",
-                                "displayCitation": "Mohren S. 2010. Klamath Network Landbird Monitoring Project 2010 Deliverables",
-                                "downloadability": "Restricted",
-                                "fileCount": 1,
-                                "id": 2184436,
-                                "lifecycle": "Draft",
-                                "title": "Klamath Network Landbird Monitoring Project 2010 Deliverables",
-                                "type": "GenericDataset",
-                                "typeName": "Generic Dataset",
-                                "visibility": "Restricted"
                             },
                             {
                                 "code": 2184912,
@@ -2879,19 +2843,6 @@
                                 "visibility": "Public"
                             },
                             {
-                                "code": 2219340,
-                                "dateOfIssue": "2009-04-04T00:00:00",
-                                "displayCitation": "Mohren S. 2009. Klamath Network Landbird Monitoring Project 2009 Deliverables",
-                                "downloadability": "Restricted",
-                                "fileCount": 1,
-                                "id": 2219340,
-                                "lifecycle": "Draft",
-                                "title": "Klamath Network Landbird Monitoring Project 2009 Deliverables",
-                                "type": "GenericDataset",
-                                "typeName": "Generic Dataset",
-                                "visibility": "Restricted"
-                            },
-                            {
                                 "code": 2223441,
                                 "dateOfIssue": "2015-08-01T00:00:00",
                                 "displayCitation": "Stephens JL. 2015. Klamath Network landbird monitoring annual report: 2014 results from Oregon Caves National Monument, Lava Beds National Monument, and Redwood National and State Parks. Natural Resource Data Series. NPS/KLMN/NRDS—2015/816. National Park Service. Fort Collins, Colorado",
@@ -2900,6 +2851,19 @@
                                 "id": 2223441,
                                 "lifecycle": "Active",
                                 "title": "Klamath Network landbird monitoring annual report: 2014 results from Oregon Caves National Monument, Lava Beds National Monument, and Redwood National and State Parks",
+                                "type": "PublishedReport",
+                                "typeName": "Published Report",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2231868,
+                                "dateOfIssue": "2016-08-01T00:00:00",
+                                "displayCitation": "Stephens JL. 2016. Landbird monitoring: 2015 results from Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area. Natural Resource Data Series. NPS/KLMN/NRDS—2016/1043. National Park Service. Fort Collins, Colorado",
+                                "downloadability": "Public",
+                                "fileCount": 1,
+                                "id": 2231868,
+                                "lifecycle": "Active",
+                                "title": "Landbird monitoring: 2015 results from Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area",
                                 "type": "PublishedReport",
                                 "typeName": "Published Report",
                                 "visibility": "Public"
@@ -2918,42 +2882,16 @@
                                 "visibility": "Public"
                             },
                             {
-                                "code": 2268200,
-                                "dateOfIssue": "2019-12-01T00:00:00",
-                                "displayCitation": "2019. Klamath Network Landbird Monitoring Project 2019 Database",
-                                "downloadability": "Internal",
-                                "fileCount": 1,
-                                "id": 2268200,
-                                "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Monitoring Project 2019 Database",
-                                "type": "TabularDataset",
-                                "typeName": "Tabular Dataset",
-                                "visibility": "Internal"
-                            },
-                            {
-                                "code": 2289823,
-                                "dateOfIssue": "2021-12-17T00:00:00",
-                                "displayCitation": "Klamath Bird Observatory. 2021. Klamath Network Landbird Monitoring Project 2021 Data",
-                                "downloadability": "Internal",
-                                "fileCount": 1,
-                                "id": 2289823,
-                                "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Monitoring Project 2021 Data",
-                                "type": "TabularDataset",
-                                "typeName": "Tabular Dataset",
-                                "visibility": "Internal"
-                            },
-                            {
-                                "code": 2278339,
-                                "dateOfIssue": "2020-08-01T00:00:00",
-                                "displayCitation": "2020. Klamath Network Landbird Monitoring Project Master Databases",
+                                "code": 2243022,
+                                "dateOfIssue": "2017-08-01T00:00:00",
+                                "displayCitation": "Stephens JL. 2017. Landbird monitoring: 2016 results from Crater Lake National Park and Oregon Caves National Monument and Preserve. Natural Resource Data Series. NPS/KLMN/NRDS—2017/1113. National Park Service. Fort Collins, Colorado",
                                 "downloadability": "Public",
-                                "fileCount": 2,
-                                "id": 2278339,
+                                "fileCount": 1,
+                                "id": 2243022,
                                 "lifecycle": "Active",
-                                "title": "Klamath Network Landbird Monitoring Project Master Databases",
-                                "type": "TabularDataset",
-                                "typeName": "Tabular Dataset",
+                                "title": "Landbird monitoring: 2016 results from Crater Lake National Park and Oregon Caves National Monument and Preserve",
+                                "type": "PublishedReport",
+                                "typeName": "Published Report",
                                 "visibility": "Public"
                             },
                             {
@@ -3035,29 +2973,68 @@
                                 "visibility": "Public"
                             },
                             {
-                                "code": 2231868,
-                                "dateOfIssue": "2016-08-01T00:00:00",
-                                "displayCitation": "Stephens JL. 2016. Landbird monitoring: 2015 results from Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area. Natural Resource Data Series. NPS/KLMN/NRDS—2016/1043. National Park Service. Fort Collins, Colorado",
-                                "downloadability": "Public",
+                                "code": 2268200,
+                                "dateOfIssue": "2019-12-01T00:00:00",
+                                "displayCitation": "2019. Klamath Network Landbird Monitoring Project 2019 Database",
+                                "downloadability": "Internal",
                                 "fileCount": 1,
-                                "id": 2231868,
+                                "id": 2268200,
                                 "lifecycle": "Active",
-                                "title": "Landbird monitoring: 2015 results from Lassen Volcanic National Park, Oregon Caves National Monument and Preserve, and Whiskeytown National Recreation Area",
-                                "type": "PublishedReport",
-                                "typeName": "Published Report",
+                                "title": "Klamath Network Landbird Monitoring Project 2019 Database",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
+                                "visibility": "Internal"
+                            },
+                            {
+                                "code": 2278339,
+                                "dateOfIssue": "2020-08-01T00:00:00",
+                                "displayCitation": "2020. Klamath Network Landbird Monitoring Project Master Databases",
+                                "downloadability": "Public",
+                                "fileCount": 2,
+                                "id": 2278339,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Monitoring Project Master Databases",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
                                 "visibility": "Public"
                             },
                             {
-                                "code": 2243022,
-                                "dateOfIssue": "2017-08-01T00:00:00",
-                                "displayCitation": "Stephens JL. 2017. Landbird monitoring: 2016 results from Crater Lake National Park and Oregon Caves National Monument and Preserve. Natural Resource Data Series. NPS/KLMN/NRDS—2017/1113. National Park Service. Fort Collins, Colorado",
-                                "downloadability": "Public",
+                                "code": 2289823,
+                                "dateOfIssue": "2021-12-17T00:00:00",
+                                "displayCitation": "Klamath Bird Observatory. 2021. Klamath Network Landbird Monitoring Project 2021 Data",
+                                "downloadability": "Internal",
                                 "fileCount": 1,
-                                "id": 2243022,
+                                "id": 2289823,
                                 "lifecycle": "Active",
-                                "title": "Landbird monitoring: 2016 results from Crater Lake National Park and Oregon Caves National Monument and Preserve",
-                                "type": "PublishedReport",
-                                "typeName": "Published Report",
+                                "title": "Klamath Network Landbird Monitoring Project 2021 Data",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
+                                "visibility": "Internal"
+                            },
+                            {
+                                "code": 2311430,
+                                "dateOfIssue": "2025-05-08T00:00:00",
+                                "displayCitation": "Klamath Bird Observatory. 2025. Klamath Network Landbird Point Count Monitoring Data 2024. National Park Service. Fort Collins, CO",
+                                "downloadability": "Public",
+                                "fileCount": 7,
+                                "id": 2311430,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Point Count Monitoring Data 2024",
+                                "type": "TabularDataset",
+                                "typeName": "Tabular Dataset",
+                                "visibility": "Public"
+                            },
+                            {
+                                "code": 2313162,
+                                "dateOfIssue": "2025-05-20T00:00:00",
+                                "displayCitation": "Klamath Bird Observatory and Klamath Inventory and Monitoring Network. 2025. Klamath Network Landbird Banding Data Package 2008-2024. National Park Service. Fort Collins CO  https://doi.org/10.57830/2313162",
+                                "downloadability": "Public",
+                                "fileCount": 11,
+                                "id": 2313162,
+                                "lifecycle": "Active",
+                                "title": "Klamath Network Landbird Banding Data Package 2008-2024",
+                                "type": "Datapackage",
+                                "typeName": "Data Package",
                                 "visibility": "Public"
                             }
                         ]
@@ -4250,14 +4227,14 @@
             "Vital Signs"
         ],
         "permissions": {
-            "sensitivity": "Not Sensitive - The information resource does not contain any park-specific, location-specific and non-public information.",
-            "sensitivityDetail": null,
-            "copyright": "No Restriction - No Restriction",
-            "quality": "High - The information is adequately documented and organized to ensure that someone using the information can readily determine whether it will meet their specific needs. In general, this information has been reviewed (e.g., from published journal articles or rigorous monitoring programs) and has adequate documentation about its generation.",
-            "useConstraints": null,
-            "fileAccess": "Public",
             "referenceOwners": "Alice Chung-MacCoubrey (Alice_Chung-MacCoubrey@nps.gov); Allison Snyder (Allison_Snyder@nps.gov); Fagan Johnson (Fagan_Johnson@nps.gov); Lise Grace (Lise_Grace@nps.gov); Margaret Beer (margaret_beer@nps.gov*); Sonya Daw (Sonya_Daw@nps.gov); Tani Hubbard (Tani_Hubbard@partner.nps.gov)",
-            "usersWithFileAccess": null
+            "fileAccess": "Public",
+            "additionalConstraints": null,
+            "usersWithFileAccess": null,
+            "legalAuthority": null,
+            "otherAuthority": null,
+            "justification": null,
+            "contactEmail": null
         },
         "history": {
             "createdBy": "CFJohnson@nps.gov",
@@ -4267,6 +4244,7 @@
             "isLegacy": false
         },
         "versions": null,
-        "contentProducerUnits": null
+        "contentProducerUnits": null,
+        "programs": null
     }
 ]
