@@ -2,7 +2,7 @@
 % Please edit documentation in R/set.R
 \name{set_by_for_nps}
 \alias{set_by_for_nps}
-\title{Indicate whether a reference was created by or for NPS}
+\title{Set the flag that indicates whether a reference was created by or for NPS}
 \usage{
 set_by_for_nps(reference_id, by_for_nps, dev = TRUE, interactive = TRUE)
 }
@@ -19,7 +19,7 @@ set_by_for_nps(reference_id, by_for_nps, dev = TRUE, interactive = TRUE)
 A list representing the full updated bibliography.
 }
 \description{
-Indicate whether a reference was created by or for NPS
+Set the flag that indicates whether a reference was created by or for NPS
 }
 \examples{
 \dontrun{

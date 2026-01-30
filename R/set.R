@@ -514,7 +514,7 @@ set_bibliography <- function(reference_id, bibliography, dev = TRUE, interactive
   return(bib)
 }
 
-#' Indicate whether a reference was created by or for NPS
+#' Set the flag that indicates whether a reference was created by or for NPS
 #'
 #' @param by_for_nps TRUE or FALSE: was this reference created by or for NPS?
 #' @inheritParams upload_file_to_reference
@@ -561,7 +561,7 @@ set_by_for_nps <- function(reference_id, by_for_nps, dev = TRUE, interactive = T
 
   bib <- httr2::resp_body_json(bib)
 
-  return(bib)
+  invisible(bib)
 }
 
 #' Add DataStore reference(s) to a Project reference
