@@ -1,0 +1,111 @@
+# Upload a File to DataStore
+
+## Before you start
+
+Before attempting to upload a file to a DataStore reference, there are
+some conditions that need to be met.
+
+1.  Make sure you have edit permissions to the DataStore reference.
+2.  Make sure the reference permits uploads. Certain types of reference,
+    such as programs and projects, are designed to be containers for
+    organizing other references and therefore cannot directly contain
+    files.
+3.  Make sure you are on the internal NPS network.
+
+## Testing
+
+Consider using the testing version of DataStore
+\[<https://irmadev.nps.gov/DataStore>\] to make sure your code works as
+expected before uploading to the real DataStore. This is an especially
+good idea if you are iterating through a large number of files.
+
+## Setup
+
+``` r
+
+library(NPSdatastore)
+```
+
+## Uploading the file
+
+You’ll need the following information:
+
+- The location of the file on your hard drive. Make sure that the path
+  includes the name of the file (not just the folder it lives in), and
+  be sure that the slashes in the path are either single forward slashes
+  (/) or double backslashes (\\.
+- The reference ID of the DataStore reference you are uploading to. When
+  you navigate to your reference in a web browser, the URL will look
+  something like this:
+  “<https://irma.nps.gov/DataStore/Reference/Profile/1234567>”. The
+  number at the end of the URL (in this example, 1234567) is your
+  reference ID.
+- Whether the file is 508-compliant.
+
+Set that information using the code template below:
+
+``` r
+
+file_to_upload <- "C:/your/file/location/here.csv"
+reference_id <- 1234567  # Replace this with your reference ID
+dev <- TRUE  # Change this to FALSE when you are done testing
+is_508_compliant <- FALSE  # If you know your file is 508 compliant, change to TRUE
+interactive <- TRUE  # If TRUE, you will be prompted to confirm file upload
+```
+
+Double-check your reference ID! If it’s incorrect, your file upload will
+either fail, or the file could end up in the wrong reference.
+
+Double-check your file path! Make sure it’s correct, and make sure you
+aren’t uploading sensitive data to a public reference.
+
+Once you are certain everything is correct, perform the file upload:
+
+``` r
+
+uploaded_file_info <- upload_file_to_reference(reference_id = reference_id,
+                                               file_path = file_to_upload, 
+                                               is_508 = is_508_compliant,
+                                               interactive = interactive,
+                                               dev = dev)
+```
+
+`upload_file_to_reference` will return a list containing a direct
+download URL for your file, as well as the file ID that DataStore uses
+to uniquely identify your file.
+
+## Uploading multiple files at once
+
+If you need to upload many files to the same reference, you just need to
+generate a vector of file paths that you can iterate over.
+
+``` r
+
+my_folder <- "scratchpad"  # The folder containing the files you want to upload
+pattern <- "\\.csv$"  # Look for files ending in ".csv"
+my_files <- list.files(my_folder, pattern = pattern, ignore.case = TRUE, full.names = TRUE)
+```
+
+Next, use `lapply` to upload each file:
+
+``` r
+
+interactive <- FALSE  # Turn off the interactive confirmation prompt
+dev <- TRUE  # It's definitely good to test this out on irmadev first
+reference_id <- 1234567  # Replace this with your reference ID
+
+# Iterate through each file and upload it
+all_file_info <- lapply(my_files, function(file) {
+  file_info <- upload_file_to_reference(reference_id = reference_id,
+                                        file_path = file, 
+                                        is_508 = is_508_compliant,
+                                        interactive = interactive,
+                                        dev = dev)
+  return(tibble::tibble(original_file = file,
+                        url = file_info$url,
+                        file_id = file_info$file_id))
+})
+
+# Collapse uploaded file info into a single dataframe
+all_file_info <- dplyr::bind_rows(all_file_info)
+```
