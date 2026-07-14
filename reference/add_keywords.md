@@ -5,7 +5,13 @@ Add keywords to a DataStore reference
 ## Usage
 
 ``` r
-add_keywords(reference_id, keywords, dev = TRUE, interactive = TRUE)
+add_keywords(
+  reference_id,
+  keywords,
+  dev = TRUE,
+  interactive = TRUE,
+  verbose = FALSE
+)
 ```
 
 ## Arguments
@@ -29,6 +35,11 @@ add_keywords(reference_id, keywords, dev = TRUE, interactive = TRUE)
 - interactive:
 
   Logical. Prompt for user confirmation before uploading?
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

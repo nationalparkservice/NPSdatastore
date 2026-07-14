@@ -6,7 +6,12 @@ the DataStore website and manually activate it.
 ## Usage
 
 ``` r
-set_lifecycle_active(reference_id, dev = TRUE, interactive = TRUE)
+set_lifecycle_active(
+  reference_id,
+  dev = TRUE,
+  interactive = TRUE,
+  verbose = FALSE
+)
 ```
 
 ## Arguments
@@ -26,6 +31,11 @@ set_lifecycle_active(reference_id, dev = TRUE, interactive = TRUE)
 - interactive:
 
   Logical. Prompt for user confirmation before uploading?
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

@@ -5,7 +5,12 @@ Search NPS DataStore references by their ID
 ## Usage
 
 ``` r
-search_references_by_id(reference_ids, nps_internal = FALSE, dev = FALSE)
+search_references_by_id(
+  reference_ids,
+  nps_internal = FALSE,
+  dev = FALSE,
+  verbose = FALSE
+)
 ```
 
 ## Arguments
@@ -26,6 +31,11 @@ search_references_by_id(reference_ids, nps_internal = FALSE, dev = FALSE)
   Logical. Set to TRUE to use the development & testing version of the
   API. If this means nothing to you, ignore and allow it to default to
   FALSE.
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

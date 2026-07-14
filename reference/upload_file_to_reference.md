@@ -16,7 +16,8 @@ upload_file_to_reference(
   dev = TRUE,
   interactive = TRUE,
   chunk_size_mb = 1,
-  retry = 1
+  retry = 1,
+  verbose = FALSE
 )
 ```
 
@@ -60,6 +61,11 @@ upload_file_to_reference(
 
   How many times to retry uploading a file chunk if it fails on the
   first try.
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

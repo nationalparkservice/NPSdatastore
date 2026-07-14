@@ -6,7 +6,7 @@ UPNs, a vector of emails, or both.
 ## Usage
 
 ``` r
-active_directory_lookup(upns, emails)
+active_directory_lookup(upns, emails, verbose = FALSE)
 ```
 
 ## Arguments

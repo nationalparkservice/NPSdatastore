@@ -5,7 +5,13 @@ Add DataStore reference(s) to a Project reference
 ## Usage
 
 ``` r
-add_to_project(project_id, reference_ids, dev = TRUE, interactive = TRUE)
+add_to_project(
+  project_id,
+  reference_ids,
+  dev = TRUE,
+  interactive = TRUE,
+  verbose = FALSE
+)
 ```
 
 ## Arguments
@@ -27,6 +33,11 @@ add_to_project(project_id, reference_ids, dev = TRUE, interactive = TRUE)
 - interactive:
 
   Logical. Prompt for user confirmation before uploading?
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

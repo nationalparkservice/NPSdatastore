@@ -5,7 +5,12 @@ Determine if a reference was created by/for the NPS
 ## Usage
 
 ``` r
-get_by_for_nps(reference_id, nps_internal = FALSE, dev = FALSE)
+get_by_for_nps(
+  reference_id,
+  nps_internal = FALSE,
+  dev = FALSE,
+  verbose = FALSE
+)
 ```
 
 ## Arguments
@@ -28,6 +33,11 @@ get_by_for_nps(reference_id, nps_internal = FALSE, dev = FALSE)
   references on the development & testing version of DataStore first.
   When everything is working, change to `dev = FALSE` and run again to
   edit the real reference.
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

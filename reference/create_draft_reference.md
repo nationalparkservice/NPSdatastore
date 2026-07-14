@@ -10,7 +10,8 @@ create_draft_reference(
   reference_type_code,
   date_published,
   date_precision_code,
-  dev = TRUE
+  dev = TRUE,
+  verbose = FALSE
 )
 ```
 
@@ -46,6 +47,11 @@ create_draft_reference(
   references on the development & testing version of DataStore first.
   When everything is working, change to `dev = FALSE` and run again to
   edit the real reference.
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

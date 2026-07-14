@@ -11,7 +11,8 @@ add_content_units(
   include_linked_units = FALSE,
   add_bounding_box = TRUE,
   dev = TRUE,
-  interactive = TRUE
+  interactive = TRUE,
+  verbose = FALSE
 )
 ```
 
@@ -45,6 +46,11 @@ add_content_units(
 - interactive:
 
   Logical. Prompt for user confirmation before uploading?
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

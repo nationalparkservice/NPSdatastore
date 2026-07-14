@@ -5,7 +5,7 @@ Create httr2 request for DataStore API
 ## Usage
 
 ``` r
-.datastore_request(is_secure, is_dev, suppress_errors = TRUE)
+.datastore_request(is_secure, is_dev, suppress_errors = TRUE, verbose = FALSE)
 ```
 
 ## Arguments

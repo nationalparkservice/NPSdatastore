@@ -7,7 +7,7 @@ at a time
 ## Usage
 
 ``` r
-.get_reference_profiles(reference_ids, is_secure, is_dev)
+.get_reference_profiles(reference_ids, is_secure, is_dev, verbose = FALSE)
 ```
 
 ## Arguments

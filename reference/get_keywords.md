@@ -5,7 +5,7 @@ Retrieve the keywords for a DataStore reference
 ## Usage
 
 ``` r
-get_keywords(reference_id, nps_internal = FALSE, dev = FALSE)
+get_keywords(reference_id, nps_internal = FALSE, dev = FALSE, verbose = FALSE)
 ```
 
 ## Arguments
@@ -28,6 +28,11 @@ get_keywords(reference_id, nps_internal = FALSE, dev = FALSE)
   references on the development & testing version of DataStore first.
   When everything is working, change to `dev = FALSE` and run again to
   edit the real reference.
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

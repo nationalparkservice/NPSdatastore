@@ -11,7 +11,8 @@ add_external_link(
   description,
   last_verified = format(Sys.Date(), "%Y-%m-%d"),
   dev = TRUE,
-  interactive = TRUE
+  interactive = TRUE,
+  verbose = FALSE
 )
 ```
 
@@ -47,6 +48,11 @@ add_external_link(
 - interactive:
 
   Logical. Prompt for user confirmation before uploading?
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

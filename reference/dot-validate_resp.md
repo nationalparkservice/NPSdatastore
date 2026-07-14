@@ -19,7 +19,7 @@ Check HTTP response and throw a helpful error if needed
 - resp:
 
   HTTP response as returned by
-  [`httr2::req_perform()`](https://rdrr.io/pkg/httr2/man/req_perform.html)
+  [`httr2::req_perform()`](https://httr2.r-lib.org/reference/req_perform.html)
 
 - nice_msg_400:
 

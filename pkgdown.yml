@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   upload-file: upload-file.html
-last_built: 2026-06-25T16:17Z
+last_built: 2026-07-14T21:34Z
 urls:
   reference: https://doi-nps.github.io/NPSdatastore/reference
   article: https://doi-nps.github.io/NPSdatastore/articles

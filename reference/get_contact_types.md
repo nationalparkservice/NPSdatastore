@@ -5,7 +5,7 @@ Get a list of valid contact types
 ## Usage
 
 ``` r
-get_contact_types(reference_type, dev = FALSE)
+get_contact_types(reference_type, dev = FALSE, verbose = FALSE)
 ```
 
 ## Arguments
@@ -22,6 +22,11 @@ get_contact_types(reference_type, dev = FALSE)
   Logical. Set to TRUE to use the development & testing version of the
   API. If this means nothing to you, ignore and allow it to default to
   FALSE.
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 

@@ -5,7 +5,13 @@ Any existing license will be overwritten.
 ## Usage
 
 ``` r
-set_license(reference_id, license_type_id, dev = TRUE, interactive = TRUE)
+set_license(
+  reference_id,
+  license_type_id,
+  dev = TRUE,
+  interactive = TRUE,
+  verbose = FALSE
+)
 ```
 
 ## Arguments
@@ -29,6 +35,11 @@ set_license(reference_id, license_type_id, dev = TRUE, interactive = TRUE)
 - interactive:
 
   Logical. Prompt for user confirmation before uploading?
+
+- verbose:
+
+  Logical. Leave this option as FALSE unless you have reported a bug and
+  are asked to provide diagnostic info.
 
 ## Value
 
